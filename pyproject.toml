@@ -4,6 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "multi-agent-flight-booking"
+version = "0.1.0"
 description = "Intelligent multi-agent flight advisor with price prediction, review analysis, and booking capability"
 requires-python = ">=3.11"
 license = { text = "MIT" }
@@ -50,7 +51,7 @@ dev = [
 ]
 
 [project.scripts]
-flight-advisor-api = "src.agent_system.main:app"
+flight-advisor-api = "agent_system.main:app"
 
 [tool.setuptools.packages.find]
 where = ["src"]
