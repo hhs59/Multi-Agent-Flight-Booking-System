@@ -115,7 +115,7 @@ class PriceIntelligenceOutput(BaseModel):
     model_config = ConfigDict(extra='forbid')
     
     flights : list[dict]
-    best_deal : FlightResult
+    best_deal : Optional[FlightResult] = None
     summary : str
 
 class ReviewAnalysisOutput(BaseModel):
@@ -136,7 +136,22 @@ class TripAdvice(BaseModel):
     total_cost_estimate : float
     action_items : list[str]
     disclaimer : str
+    citations : list[Citation] = Field(default_factory=list)
 
+class Citation(BaseModel):
+    model_config = ConfigDict(extra='forbid')
+
+    chunk_id : str
+    airline : str
+    text : str
+
+class GenerationMetrics(BaseModel):
+    model_config = ConfigDict(extra='forbid')
+
+    faithfulness : float
+    hallucination_rate : float
+    judge_scores : dict
+    
 class AgentResponse(BaseModel):
     model_config = ConfigDict(extra='forbid')
 
@@ -150,3 +165,4 @@ class AgentResponse(BaseModel):
     tokens_used : int
     errors : list[str]
     language : Literal['en', 'vi']
+    retrieval_context : Optional[list[Citation]] = None
