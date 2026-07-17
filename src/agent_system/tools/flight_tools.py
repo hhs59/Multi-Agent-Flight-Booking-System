@@ -16,7 +16,7 @@ _weather_cache: TTLCache = TTLCache(maxsize=128, ttl=3600)  # 1 hour
 
 _HTTP_TIMEOUT = httpx.Timeout(10.0)
 
-#Airline Code -> Full Name 
+#Airline Code -> Full Name
 AIRLINE_CODES: dict[str, str] = {
     "VN": "Vietnam Airlines",
     "VJ": "VietJet Air",
@@ -28,7 +28,7 @@ AIRLINE_CODES: dict[str, str] = {
     "OZ": "Asiana Airlines",
 }
 
-#IATA Code -> City name 
+#IATA Code -> City name
 IATA_CITY_NAMES: dict[str, str] = {
     "HAN": "Hanoi",
     "SGN": "Ho Chi Minh City",
@@ -94,9 +94,9 @@ def _parse_duration_minutes(duration: str) -> int:
 
 
 async def _parse_amadeus_offers(
-    payload: dict, 
-    destination: str, 
-    date: str, 
+    payload: dict,
+    destination: str,
+    date: str,
     mock: bool
     ) -> list[FlightResult]:
     weather = await get_weather(destination, date, mock=mock)
@@ -275,7 +275,7 @@ def _format_weather(payload: dict, date: str | None) -> str:
         target_day = date[:10]  # YYYY-MM-DD
         matching = [e for e in entries if e.get("dt_txt", "").startswith(target_day)]
         chosen = matching[0] if matching else entries[0]
-    
+
     chosen = entries[0]
 
     temp = chosen.get("main", {}).get("temp")
@@ -342,6 +342,16 @@ _MOCK_FLIGHTS: dict[str, list[tuple[str, str, str, int, int, float, int]]] = {
         ("VJ", "VJ512", "18:55", 90, 0, 50.00, 16),
     ],
 }
+
+
+def find_mock_flight(flight_number: str) -> FlightResult | None:
+    for route_key in _MOCK_FLIGHTS:
+        origin, destination = route_key.split("-")
+        for flights in _mock_flights(origin, destination):
+            if flights.flight_number == flight_number:
+                flights = _mock_flights(origin, destination)
+                return next((f for f in flights if f.flight_number == flight_number), None)
+    return None
 
 
 def _mock_flights(origin: str, destination: str, date: str | None = None) -> list[FlightResult]:
