@@ -165,13 +165,14 @@ async def search_flights(
 
     if mock:
         results = _mock_flights(origin, destination, date)
+        results = [f for f in results if f.seats_available is None or f.seats_available >= passengers]
         _flights_cache[cache_key] = results
         return results
 
     token = await _get_amadeus_access_token()
     if token is None:
         logger.warning("No Amadeus token — falling back to mock for %s→%s", origin, destination)
-        results = _mock_flights(origin, destination, date)
+        results = [f for f in _mock_flights(origin, destination, date) if f.seats_available is None or f.seats_available >= passengers]
         _flights_cache[cache_key] = results
         return results
 
@@ -197,7 +198,7 @@ async def search_flights(
                 "Amadeus flight search returned %s — falling back to mock",
                 response.status_code,
             )
-            results = _mock_flights(origin, destination, date)
+            results = [f for f in _mock_flights(origin, destination, date) if f.seats_available is None or f.seats_available >= passengers]
             _flights_cache[cache_key] = results
             return results
 
@@ -208,7 +209,7 @@ async def search_flights(
 
     except (httpx.HTTPError, KeyError, ValueError, TypeError) as exc:
         logger.warning("Amadeus flight search failed (%s) — falling back to mock", exc)
-        results = _mock_flights(origin, destination, date)
+        results = [f for f in _mock_flights(origin, destination, date) if f.seats_available is None or f.seats_available >= passengers]
         _flights_cache[cache_key] = results
         return results
 
