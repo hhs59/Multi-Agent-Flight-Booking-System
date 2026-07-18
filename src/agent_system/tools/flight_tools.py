@@ -276,8 +276,8 @@ def _format_weather(payload: dict, date: str | None) -> str:
         target_day = date[:10]  # YYYY-MM-DD
         matching = [e for e in entries if e.get("dt_txt", "").startswith(target_day)]
         chosen = matching[0] if matching else entries[0]
-
-    chosen = entries[0]
+    else:
+        chosen = entries[0]
 
     temp = chosen.get("main", {}).get("temp")
     description = chosen.get("weather", [{}])[0].get("description", "unknown")
@@ -348,10 +348,9 @@ _MOCK_FLIGHTS: dict[str, list[tuple[str, str, str, int, int, float, int]]] = {
 def find_mock_flight(flight_number: str) -> FlightResult | None:
     for route_key in _MOCK_FLIGHTS:
         origin, destination = route_key.split("-")
-        for flights in _mock_flights(origin, destination):
-            if flights.flight_number == flight_number:
-                flights = _mock_flights(origin, destination)
-                return next((f for f in flights if f.flight_number == flight_number), None)
+        for flight in _mock_flights(origin, destination):
+            if flight.flight_number == flight_number:
+                return flight
     return None
 
 
