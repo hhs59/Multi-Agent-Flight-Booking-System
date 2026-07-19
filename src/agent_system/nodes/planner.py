@@ -3,23 +3,13 @@ import logging
 
 from langchain_core.messages import AIMessage, HumanMessage, SystemMessage
 
-from agent_system.llm import get_llm
+from agent_system.llm import extract_json, get_llm
 from agent_system.models import TaskPlan
 from agent_system.prompts import PLANNER_SYSTEM_PROMPT
 
 logger = logging.getLogger(__name__)
 
 _BOOKING_REQUIRED_FIELDS = ("flight_number", "passenger_name", "passenger_email", "passport_number")
-
-
-def _extract_json(text: str) -> str:
-    text = text.strip()
-    #Remove Markdown format
-    if text.startswith("```"):
-        text = text.split("```")[1]
-        if text.startswith("json"):
-            text = text[4:]
-    return text.strip()
 
 
 def _normalize_plan_dict(data: dict) -> dict:
@@ -47,7 +37,7 @@ async def planner_node(state: dict) -> dict:
 
     try:
         response = await llm.ainvoke(messages)
-        raw = _extract_json(response.content)
+        raw = extract_json(response.content)
         data = _normalize_plan_dict(json.loads(raw))
         plan = TaskPlan.model_validate(data)
     except Exception as exc:
