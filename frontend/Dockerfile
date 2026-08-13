@@ -29,16 +29,10 @@ ENV VITE_API_BASE_URL=${VITE_API_BASE_URL} \
 
 RUN npm run build
 
-FROM node:22-alpine
+FROM nginx:1.27-alpine
+ENV NGINX_ENVSUBST_VARS="PORT BACKEND_URL"
 
-WORKDIR /app
-ENV NODE_ENV=production
+COPY --from=build /app/dist /usr/share/nginx/html
+COPY nginx.conf.template /etc/nginx/templates/default.conf.template
 
-RUN npm install --global serve@14.2.4 \
-    && npm cache clean --force
-
-COPY --from=build /app/dist ./dist
-
-EXPOSE 4173
-
-CMD ["sh", "-c", "exec serve --single --listen ${PORT:-4173} dist"]
+EXPOSE 8080
