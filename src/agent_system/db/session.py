@@ -9,12 +9,21 @@ from sqlalchemy.orm import Session, sessionmaker
 from sqlalchemy.pool import StaticPool
 
 
+def normalize_database_url(database_url: str) -> str:
+    """Use the psycopg v3 SQLAlchemy dialect for generic PostgreSQL URLs."""
+    for prefix in ("postgres://", "postgresql://", "postgresql+psycopg2://"):
+        if database_url.startswith(prefix):
+            return "postgresql+psycopg://" + database_url[len(prefix) :]
+    return database_url
+
+
 def create_database_engine(
     database_url: str,
     *,
     allow_sqlite_for_tests: bool = False,
     echo: bool = False,
 ) -> Engine:
+    database_url = normalize_database_url(database_url)
     if database_url.startswith("sqlite") and not allow_sqlite_for_tests:
         raise ValueError("SQLite is permitted only for isolated unit tests")
     if not database_url.startswith(("postgresql", "sqlite")):

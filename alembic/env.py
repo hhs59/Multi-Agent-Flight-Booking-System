@@ -7,6 +7,7 @@ from sqlalchemy import engine_from_config, pool
 
 from agent_system.db import models as database_models  # noqa: F401
 from agent_system.db.base import Base
+from agent_system.db.session import normalize_database_url
 from alembic import context
 
 config = context.config
@@ -15,6 +16,7 @@ if config.config_file_name is not None:
 
 database_url = os.environ.get("DATABASE_URL")
 if database_url:
+    database_url = normalize_database_url(database_url)
     config.set_main_option("sqlalchemy.url", database_url.replace("%", "%%"))
 
 target_metadata = Base.metadata
