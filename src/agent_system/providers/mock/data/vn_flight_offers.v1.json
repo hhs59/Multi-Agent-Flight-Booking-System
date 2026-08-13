@@ -1,0 +1,1314 @@
+{
+  "schema_version": 1,
+  "inventory_notice": "SYNTHETIC TEST INVENTORY - NOT BOOKABLE",
+  "offers": [
+    {
+      "route": "HAN-SGN",
+      "provider_offer_id": "SYN-HAN-SGN-VN205",
+      "carrier": "VN",
+      "flight_number": "VN205",
+      "departure_local_time": "08:00",
+      "duration_minutes": 130,
+      "stops": 0,
+      "adult_total_vnd": "1850000",
+      "seats": 9,
+      "checked_weight_kg": "20",
+      "fare_brand": "Synthetic Flex",
+      "passenger_prices_vnd": {
+        "adult": {
+          "base": "1517000",
+          "taxes_and_fees": "333000",
+          "total": "1850000"
+        },
+        "child": {
+          "base": "1137750",
+          "taxes_and_fees": "249750",
+          "total": "1387500"
+        },
+        "infant": {
+          "base": "151700",
+          "taxes_and_fees": "33300",
+          "total": "185000"
+        }
+      },
+      "supported_cabins": [
+        "economy",
+        "premium_economy",
+        "business",
+        "first"
+      ],
+      "baggage": {
+        "checked_pieces": 1,
+        "checked_weight_kg": "20",
+        "cabin_pieces": 1
+      },
+      "fare_conditions": {
+        "change_allowed": true,
+        "cancellation_allowed": true,
+        "refundable": true,
+        "description": "Synthetic test fare - not bookable"
+      },
+      "segments": [
+        {
+          "origin": "HAN",
+          "destination": "SGN",
+          "departure_local_time": "08:00",
+          "duration_minutes": 130,
+          "marketing_carrier": "VN",
+          "operating_carrier": "VN",
+          "flight_number": "VN205",
+          "aircraft_code": "SYN"
+        }
+      ]
+    },
+    {
+      "route": "HAN-SGN",
+      "provider_offer_id": "SYN-HAN-SGN-VJ125",
+      "carrier": "VJ",
+      "flight_number": "VJ125",
+      "departure_local_time": "10:10",
+      "duration_minutes": 135,
+      "stops": 0,
+      "adult_total_vnd": "1390000",
+      "seats": 7,
+      "checked_weight_kg": "20",
+      "fare_brand": "Synthetic Eco",
+      "passenger_prices_vnd": {
+        "adult": {
+          "base": "1139800",
+          "taxes_and_fees": "250200",
+          "total": "1390000"
+        },
+        "child": {
+          "base": "854850",
+          "taxes_and_fees": "187650",
+          "total": "1042500"
+        },
+        "infant": {
+          "base": "113980",
+          "taxes_and_fees": "25020",
+          "total": "139000"
+        }
+      },
+      "supported_cabins": [
+        "economy",
+        "premium_economy",
+        "business",
+        "first"
+      ],
+      "baggage": {
+        "checked_pieces": 1,
+        "checked_weight_kg": "20",
+        "cabin_pieces": 1
+      },
+      "fare_conditions": {
+        "change_allowed": true,
+        "cancellation_allowed": true,
+        "refundable": true,
+        "description": "Synthetic test fare - not bookable"
+      },
+      "segments": [
+        {
+          "origin": "HAN",
+          "destination": "SGN",
+          "departure_local_time": "10:10",
+          "duration_minutes": 135,
+          "marketing_carrier": "VJ",
+          "operating_carrier": "VJ",
+          "flight_number": "VJ125",
+          "aircraft_code": "SYN"
+        }
+      ]
+    },
+    {
+      "route": "HAN-SGN",
+      "provider_offer_id": "SYN-HAN-SGN-QH203",
+      "carrier": "QH",
+      "flight_number": "QH203",
+      "departure_local_time": "13:20",
+      "duration_minutes": 140,
+      "stops": 0,
+      "adult_total_vnd": "1520000",
+      "seats": 6,
+      "checked_weight_kg": "20",
+      "fare_brand": "Synthetic Smart",
+      "passenger_prices_vnd": {
+        "adult": {
+          "base": "1246400",
+          "taxes_and_fees": "273600",
+          "total": "1520000"
+        },
+        "child": {
+          "base": "934800",
+          "taxes_and_fees": "205200",
+          "total": "1140000"
+        },
+        "infant": {
+          "base": "124640",
+          "taxes_and_fees": "27360",
+          "total": "152000"
+        }
+      },
+      "supported_cabins": [
+        "economy",
+        "premium_economy",
+        "business",
+        "first"
+      ],
+      "baggage": {
+        "checked_pieces": 1,
+        "checked_weight_kg": "20",
+        "cabin_pieces": 1
+      },
+      "fare_conditions": {
+        "change_allowed": true,
+        "cancellation_allowed": true,
+        "refundable": true,
+        "description": "Synthetic test fare - not bookable"
+      },
+      "segments": [
+        {
+          "origin": "HAN",
+          "destination": "SGN",
+          "departure_local_time": "13:20",
+          "duration_minutes": 140,
+          "marketing_carrier": "QH",
+          "operating_carrier": "QH",
+          "flight_number": "QH203",
+          "aircraft_code": "SYN"
+        }
+      ]
+    },
+    {
+      "route": "HAN-SGN",
+      "provider_offer_id": "SYN-HAN-SGN-VU787",
+      "carrier": "VU",
+      "flight_number": "VU787",
+      "departure_local_time": "16:45",
+      "duration_minutes": 145,
+      "stops": 0,
+      "adult_total_vnd": "1470000",
+      "seats": 5,
+      "checked_weight_kg": "20",
+      "fare_brand": "Synthetic Standard",
+      "passenger_prices_vnd": {
+        "adult": {
+          "base": "1205400",
+          "taxes_and_fees": "264600",
+          "total": "1470000"
+        },
+        "child": {
+          "base": "904050",
+          "taxes_and_fees": "198450",
+          "total": "1102500"
+        },
+        "infant": {
+          "base": "120540",
+          "taxes_and_fees": "26460",
+          "total": "147000"
+        }
+      },
+      "supported_cabins": [
+        "economy",
+        "premium_economy",
+        "business",
+        "first"
+      ],
+      "baggage": {
+        "checked_pieces": 1,
+        "checked_weight_kg": "20",
+        "cabin_pieces": 1
+      },
+      "fare_conditions": {
+        "change_allowed": true,
+        "cancellation_allowed": true,
+        "refundable": true,
+        "description": "Synthetic test fare - not bookable"
+      },
+      "segments": [
+        {
+          "origin": "HAN",
+          "destination": "SGN",
+          "departure_local_time": "16:45",
+          "duration_minutes": 145,
+          "marketing_carrier": "VU",
+          "operating_carrier": "VU",
+          "flight_number": "VU787",
+          "aircraft_code": "SYN"
+        }
+      ]
+    },
+    {
+      "route": "HAN-SGN",
+      "provider_offer_id": "SYN-HAN-SGN-VN-DAD",
+      "carrier": "VN",
+      "flight_number": "VN999",
+      "departure_local_time": "06:30",
+      "duration_minutes": 240,
+      "stops": 1,
+      "adult_total_vnd": "1290000",
+      "seats": 4,
+      "checked_weight_kg": "20",
+      "fare_brand": "Synthetic Connection",
+      "passenger_prices_vnd": {
+        "adult": {
+          "base": "1057800",
+          "taxes_and_fees": "232200",
+          "total": "1290000"
+        },
+        "child": {
+          "base": "793350",
+          "taxes_and_fees": "174150",
+          "total": "967500"
+        },
+        "infant": {
+          "base": "105780",
+          "taxes_and_fees": "23220",
+          "total": "129000"
+        }
+      },
+      "supported_cabins": [
+        "economy",
+        "premium_economy",
+        "business",
+        "first"
+      ],
+      "baggage": {
+        "checked_pieces": 1,
+        "checked_weight_kg": "20",
+        "cabin_pieces": 1
+      },
+      "fare_conditions": {
+        "change_allowed": true,
+        "cancellation_allowed": true,
+        "refundable": true,
+        "description": "Synthetic test fare - not bookable"
+      },
+      "segments": [
+        {
+          "origin": "HAN",
+          "destination": "DAD",
+          "departure_local_time": "06:30",
+          "duration_minutes": 85,
+          "marketing_carrier": "VN",
+          "operating_carrier": "VN",
+          "flight_number": "VN999",
+          "aircraft_code": "SYN"
+        },
+        {
+          "origin": "DAD",
+          "destination": "SGN",
+          "departure_local_time": "08:45",
+          "duration_minutes": 105,
+          "marketing_carrier": "VN",
+          "operating_carrier": "VN",
+          "flight_number": "VN998",
+          "aircraft_code": "SYN"
+        }
+      ]
+    },
+    {
+      "route": "HAN-DAD",
+      "provider_offer_id": "SYN-HAN-DAD-VN171",
+      "carrier": "VN",
+      "flight_number": "VN171",
+      "departure_local_time": "07:30",
+      "duration_minutes": 85,
+      "stops": 0,
+      "adult_total_vnd": "1320000",
+      "seats": 9,
+      "checked_weight_kg": "20",
+      "fare_brand": "Synthetic Flex",
+      "passenger_prices_vnd": {
+        "adult": {
+          "base": "1082400",
+          "taxes_and_fees": "237600",
+          "total": "1320000"
+        },
+        "child": {
+          "base": "811800",
+          "taxes_and_fees": "178200",
+          "total": "990000"
+        },
+        "infant": {
+          "base": "108240",
+          "taxes_and_fees": "23760",
+          "total": "132000"
+        }
+      },
+      "supported_cabins": [
+        "economy",
+        "premium_economy",
+        "business",
+        "first"
+      ],
+      "baggage": {
+        "checked_pieces": 1,
+        "checked_weight_kg": "20",
+        "cabin_pieces": 1
+      },
+      "fare_conditions": {
+        "change_allowed": true,
+        "cancellation_allowed": true,
+        "refundable": true,
+        "description": "Synthetic test fare - not bookable"
+      },
+      "segments": [
+        {
+          "origin": "HAN",
+          "destination": "DAD",
+          "departure_local_time": "07:30",
+          "duration_minutes": 85,
+          "marketing_carrier": "VN",
+          "operating_carrier": "VN",
+          "flight_number": "VN171",
+          "aircraft_code": "SYN"
+        }
+      ]
+    },
+    {
+      "route": "HAN-DAD",
+      "provider_offer_id": "SYN-HAN-DAD-VJ511",
+      "carrier": "VJ",
+      "flight_number": "VJ511",
+      "departure_local_time": "10:00",
+      "duration_minutes": 90,
+      "stops": 0,
+      "adult_total_vnd": "980000",
+      "seats": 8,
+      "checked_weight_kg": "20",
+      "fare_brand": "Synthetic Eco",
+      "passenger_prices_vnd": {
+        "adult": {
+          "base": "803600",
+          "taxes_and_fees": "176400",
+          "total": "980000"
+        },
+        "child": {
+          "base": "602700",
+          "taxes_and_fees": "132300",
+          "total": "735000"
+        },
+        "infant": {
+          "base": "80360",
+          "taxes_and_fees": "17640",
+          "total": "98000"
+        }
+      },
+      "supported_cabins": [
+        "economy",
+        "premium_economy",
+        "business",
+        "first"
+      ],
+      "baggage": {
+        "checked_pieces": 1,
+        "checked_weight_kg": "20",
+        "cabin_pieces": 1
+      },
+      "fare_conditions": {
+        "change_allowed": true,
+        "cancellation_allowed": true,
+        "refundable": true,
+        "description": "Synthetic test fare - not bookable"
+      },
+      "segments": [
+        {
+          "origin": "HAN",
+          "destination": "DAD",
+          "departure_local_time": "10:00",
+          "duration_minutes": 90,
+          "marketing_carrier": "VJ",
+          "operating_carrier": "VJ",
+          "flight_number": "VJ511",
+          "aircraft_code": "SYN"
+        }
+      ]
+    },
+    {
+      "route": "HAN-DAD",
+      "provider_offer_id": "SYN-HAN-DAD-QH101",
+      "carrier": "QH",
+      "flight_number": "QH101",
+      "departure_local_time": "14:15",
+      "duration_minutes": 90,
+      "stops": 0,
+      "adult_total_vnd": "1090000",
+      "seats": 6,
+      "checked_weight_kg": "20",
+      "fare_brand": "Synthetic Smart",
+      "passenger_prices_vnd": {
+        "adult": {
+          "base": "893800",
+          "taxes_and_fees": "196200",
+          "total": "1090000"
+        },
+        "child": {
+          "base": "670350",
+          "taxes_and_fees": "147150",
+          "total": "817500"
+        },
+        "infant": {
+          "base": "89380",
+          "taxes_and_fees": "19620",
+          "total": "109000"
+        }
+      },
+      "supported_cabins": [
+        "economy",
+        "premium_economy",
+        "business",
+        "first"
+      ],
+      "baggage": {
+        "checked_pieces": 1,
+        "checked_weight_kg": "20",
+        "cabin_pieces": 1
+      },
+      "fare_conditions": {
+        "change_allowed": true,
+        "cancellation_allowed": true,
+        "refundable": true,
+        "description": "Synthetic test fare - not bookable"
+      },
+      "segments": [
+        {
+          "origin": "HAN",
+          "destination": "DAD",
+          "departure_local_time": "14:15",
+          "duration_minutes": 90,
+          "marketing_carrier": "QH",
+          "operating_carrier": "QH",
+          "flight_number": "QH101",
+          "aircraft_code": "SYN"
+        }
+      ]
+    },
+    {
+      "route": "HAN-DAD",
+      "provider_offer_id": "SYN-HAN-DAD-VU635",
+      "carrier": "VU",
+      "flight_number": "VU635",
+      "departure_local_time": "18:10",
+      "duration_minutes": 95,
+      "stops": 0,
+      "adult_total_vnd": "1030000",
+      "seats": 5,
+      "checked_weight_kg": "20",
+      "fare_brand": "Synthetic Standard",
+      "passenger_prices_vnd": {
+        "adult": {
+          "base": "844600",
+          "taxes_and_fees": "185400",
+          "total": "1030000"
+        },
+        "child": {
+          "base": "633450",
+          "taxes_and_fees": "139050",
+          "total": "772500"
+        },
+        "infant": {
+          "base": "84460",
+          "taxes_and_fees": "18540",
+          "total": "103000"
+        }
+      },
+      "supported_cabins": [
+        "economy",
+        "premium_economy",
+        "business",
+        "first"
+      ],
+      "baggage": {
+        "checked_pieces": 1,
+        "checked_weight_kg": "20",
+        "cabin_pieces": 1
+      },
+      "fare_conditions": {
+        "change_allowed": true,
+        "cancellation_allowed": true,
+        "refundable": true,
+        "description": "Synthetic test fare - not bookable"
+      },
+      "segments": [
+        {
+          "origin": "HAN",
+          "destination": "DAD",
+          "departure_local_time": "18:10",
+          "duration_minutes": 95,
+          "marketing_carrier": "VU",
+          "operating_carrier": "VU",
+          "flight_number": "VU635",
+          "aircraft_code": "SYN"
+        }
+      ]
+    },
+    {
+      "route": "SGN-DAD",
+      "provider_offer_id": "SYN-SGN-DAD-VN130",
+      "carrier": "VN",
+      "flight_number": "VN130",
+      "departure_local_time": "08:20",
+      "duration_minutes": 85,
+      "stops": 0,
+      "adult_total_vnd": "1280000",
+      "seats": 9,
+      "checked_weight_kg": "20",
+      "fare_brand": "Synthetic Flex",
+      "passenger_prices_vnd": {
+        "adult": {
+          "base": "1049600",
+          "taxes_and_fees": "230400",
+          "total": "1280000"
+        },
+        "child": {
+          "base": "787200",
+          "taxes_and_fees": "172800",
+          "total": "960000"
+        },
+        "infant": {
+          "base": "104960",
+          "taxes_and_fees": "23040",
+          "total": "128000"
+        }
+      },
+      "supported_cabins": [
+        "economy",
+        "premium_economy",
+        "business",
+        "first"
+      ],
+      "baggage": {
+        "checked_pieces": 1,
+        "checked_weight_kg": "20",
+        "cabin_pieces": 1
+      },
+      "fare_conditions": {
+        "change_allowed": true,
+        "cancellation_allowed": true,
+        "refundable": true,
+        "description": "Synthetic test fare - not bookable"
+      },
+      "segments": [
+        {
+          "origin": "SGN",
+          "destination": "DAD",
+          "departure_local_time": "08:20",
+          "duration_minutes": 85,
+          "marketing_carrier": "VN",
+          "operating_carrier": "VN",
+          "flight_number": "VN130",
+          "aircraft_code": "SYN"
+        }
+      ]
+    },
+    {
+      "route": "SGN-DAD",
+      "provider_offer_id": "SYN-SGN-DAD-VJ630",
+      "carrier": "VJ",
+      "flight_number": "VJ630",
+      "departure_local_time": "11:00",
+      "duration_minutes": 90,
+      "stops": 0,
+      "adult_total_vnd": "920000",
+      "seats": 8,
+      "checked_weight_kg": "20",
+      "fare_brand": "Synthetic Eco",
+      "passenger_prices_vnd": {
+        "adult": {
+          "base": "754400",
+          "taxes_and_fees": "165600",
+          "total": "920000"
+        },
+        "child": {
+          "base": "565800",
+          "taxes_and_fees": "124200",
+          "total": "690000"
+        },
+        "infant": {
+          "base": "75440",
+          "taxes_and_fees": "16560",
+          "total": "92000"
+        }
+      },
+      "supported_cabins": [
+        "economy",
+        "premium_economy",
+        "business",
+        "first"
+      ],
+      "baggage": {
+        "checked_pieces": 1,
+        "checked_weight_kg": "20",
+        "cabin_pieces": 1
+      },
+      "fare_conditions": {
+        "change_allowed": true,
+        "cancellation_allowed": true,
+        "refundable": true,
+        "description": "Synthetic test fare - not bookable"
+      },
+      "segments": [
+        {
+          "origin": "SGN",
+          "destination": "DAD",
+          "departure_local_time": "11:00",
+          "duration_minutes": 90,
+          "marketing_carrier": "VJ",
+          "operating_carrier": "VJ",
+          "flight_number": "VJ630",
+          "aircraft_code": "SYN"
+        }
+      ]
+    },
+    {
+      "route": "SGN-DAD",
+      "provider_offer_id": "SYN-SGN-DAD-QH150",
+      "carrier": "QH",
+      "flight_number": "QH150",
+      "departure_local_time": "15:30",
+      "duration_minutes": 90,
+      "stops": 0,
+      "adult_total_vnd": "1050000",
+      "seats": 6,
+      "checked_weight_kg": "20",
+      "fare_brand": "Synthetic Smart",
+      "passenger_prices_vnd": {
+        "adult": {
+          "base": "861000",
+          "taxes_and_fees": "189000",
+          "total": "1050000"
+        },
+        "child": {
+          "base": "645750",
+          "taxes_and_fees": "141750",
+          "total": "787500"
+        },
+        "infant": {
+          "base": "86100",
+          "taxes_and_fees": "18900",
+          "total": "105000"
+        }
+      },
+      "supported_cabins": [
+        "economy",
+        "premium_economy",
+        "business",
+        "first"
+      ],
+      "baggage": {
+        "checked_pieces": 1,
+        "checked_weight_kg": "20",
+        "cabin_pieces": 1
+      },
+      "fare_conditions": {
+        "change_allowed": true,
+        "cancellation_allowed": true,
+        "refundable": true,
+        "description": "Synthetic test fare - not bookable"
+      },
+      "segments": [
+        {
+          "origin": "SGN",
+          "destination": "DAD",
+          "departure_local_time": "15:30",
+          "duration_minutes": 90,
+          "marketing_carrier": "QH",
+          "operating_carrier": "QH",
+          "flight_number": "QH150",
+          "aircraft_code": "SYN"
+        }
+      ]
+    },
+    {
+      "route": "SGN-DAD",
+      "provider_offer_id": "SYN-SGN-DAD-VU672",
+      "carrier": "VU",
+      "flight_number": "VU672",
+      "departure_local_time": "19:05",
+      "duration_minutes": 95,
+      "stops": 0,
+      "adult_total_vnd": "990000",
+      "seats": 5,
+      "checked_weight_kg": "20",
+      "fare_brand": "Synthetic Standard",
+      "passenger_prices_vnd": {
+        "adult": {
+          "base": "811800",
+          "taxes_and_fees": "178200",
+          "total": "990000"
+        },
+        "child": {
+          "base": "608850",
+          "taxes_and_fees": "133650",
+          "total": "742500"
+        },
+        "infant": {
+          "base": "81180",
+          "taxes_and_fees": "17820",
+          "total": "99000"
+        }
+      },
+      "supported_cabins": [
+        "economy",
+        "premium_economy",
+        "business",
+        "first"
+      ],
+      "baggage": {
+        "checked_pieces": 1,
+        "checked_weight_kg": "20",
+        "cabin_pieces": 1
+      },
+      "fare_conditions": {
+        "change_allowed": true,
+        "cancellation_allowed": true,
+        "refundable": true,
+        "description": "Synthetic test fare - not bookable"
+      },
+      "segments": [
+        {
+          "origin": "SGN",
+          "destination": "DAD",
+          "departure_local_time": "19:05",
+          "duration_minutes": 95,
+          "marketing_carrier": "VU",
+          "operating_carrier": "VU",
+          "flight_number": "VU672",
+          "aircraft_code": "SYN"
+        }
+      ]
+    },
+    {
+      "route": "SGN-PQC",
+      "provider_offer_id": "SYN-SGN-PQC-VN1821",
+      "carrier": "VN",
+      "flight_number": "VN1821",
+      "departure_local_time": "07:10",
+      "duration_minutes": 65,
+      "stops": 0,
+      "adult_total_vnd": "1180000",
+      "seats": 9,
+      "checked_weight_kg": "20",
+      "fare_brand": "Synthetic Flex",
+      "passenger_prices_vnd": {
+        "adult": {
+          "base": "967600",
+          "taxes_and_fees": "212400",
+          "total": "1180000"
+        },
+        "child": {
+          "base": "725700",
+          "taxes_and_fees": "159300",
+          "total": "885000"
+        },
+        "infant": {
+          "base": "96760",
+          "taxes_and_fees": "21240",
+          "total": "118000"
+        }
+      },
+      "supported_cabins": [
+        "economy",
+        "premium_economy",
+        "business",
+        "first"
+      ],
+      "baggage": {
+        "checked_pieces": 1,
+        "checked_weight_kg": "20",
+        "cabin_pieces": 1
+      },
+      "fare_conditions": {
+        "change_allowed": true,
+        "cancellation_allowed": true,
+        "refundable": true,
+        "description": "Synthetic test fare - not bookable"
+      },
+      "segments": [
+        {
+          "origin": "SGN",
+          "destination": "PQC",
+          "departure_local_time": "07:10",
+          "duration_minutes": 65,
+          "marketing_carrier": "VN",
+          "operating_carrier": "VN",
+          "flight_number": "VN1821",
+          "aircraft_code": "SYN"
+        }
+      ]
+    },
+    {
+      "route": "SGN-PQC",
+      "provider_offer_id": "SYN-SGN-PQC-VJ321",
+      "carrier": "VJ",
+      "flight_number": "VJ321",
+      "departure_local_time": "12:40",
+      "duration_minutes": 70,
+      "stops": 0,
+      "adult_total_vnd": "860000",
+      "seats": 7,
+      "checked_weight_kg": "20",
+      "fare_brand": "Synthetic Eco",
+      "passenger_prices_vnd": {
+        "adult": {
+          "base": "705200",
+          "taxes_and_fees": "154800",
+          "total": "860000"
+        },
+        "child": {
+          "base": "528900",
+          "taxes_and_fees": "116100",
+          "total": "645000"
+        },
+        "infant": {
+          "base": "70520",
+          "taxes_and_fees": "15480",
+          "total": "86000"
+        }
+      },
+      "supported_cabins": [
+        "economy",
+        "premium_economy",
+        "business",
+        "first"
+      ],
+      "baggage": {
+        "checked_pieces": 1,
+        "checked_weight_kg": "20",
+        "cabin_pieces": 1
+      },
+      "fare_conditions": {
+        "change_allowed": true,
+        "cancellation_allowed": true,
+        "refundable": true,
+        "description": "Synthetic test fare - not bookable"
+      },
+      "segments": [
+        {
+          "origin": "SGN",
+          "destination": "PQC",
+          "departure_local_time": "12:40",
+          "duration_minutes": 70,
+          "marketing_carrier": "VJ",
+          "operating_carrier": "VJ",
+          "flight_number": "VJ321",
+          "aircraft_code": "SYN"
+        }
+      ]
+    },
+    {
+      "route": "SGN-PQC",
+      "provider_offer_id": "SYN-SGN-PQC-VU301",
+      "carrier": "VU",
+      "flight_number": "VU301",
+      "departure_local_time": "17:20",
+      "duration_minutes": 75,
+      "stops": 0,
+      "adult_total_vnd": "910000",
+      "seats": 5,
+      "checked_weight_kg": "20",
+      "fare_brand": "Synthetic Standard",
+      "passenger_prices_vnd": {
+        "adult": {
+          "base": "746200",
+          "taxes_and_fees": "163800",
+          "total": "910000"
+        },
+        "child": {
+          "base": "559650",
+          "taxes_and_fees": "122850",
+          "total": "682500"
+        },
+        "infant": {
+          "base": "74620",
+          "taxes_and_fees": "16380",
+          "total": "91000"
+        }
+      },
+      "supported_cabins": [
+        "economy",
+        "premium_economy",
+        "business",
+        "first"
+      ],
+      "baggage": {
+        "checked_pieces": 1,
+        "checked_weight_kg": "20",
+        "cabin_pieces": 1
+      },
+      "fare_conditions": {
+        "change_allowed": true,
+        "cancellation_allowed": true,
+        "refundable": true,
+        "description": "Synthetic test fare - not bookable"
+      },
+      "segments": [
+        {
+          "origin": "SGN",
+          "destination": "PQC",
+          "departure_local_time": "17:20",
+          "duration_minutes": 75,
+          "marketing_carrier": "VU",
+          "operating_carrier": "VU",
+          "flight_number": "VU301",
+          "aircraft_code": "SYN"
+        }
+      ]
+    },
+    {
+      "route": "HAN-CXR",
+      "provider_offer_id": "SYN-HAN-CXR-VN1553",
+      "carrier": "VN",
+      "flight_number": "VN1553",
+      "departure_local_time": "06:50",
+      "duration_minutes": 115,
+      "stops": 0,
+      "adult_total_vnd": "1760000",
+      "seats": 9,
+      "checked_weight_kg": "20",
+      "fare_brand": "Synthetic Flex",
+      "passenger_prices_vnd": {
+        "adult": {
+          "base": "1443200",
+          "taxes_and_fees": "316800",
+          "total": "1760000"
+        },
+        "child": {
+          "base": "1082400",
+          "taxes_and_fees": "237600",
+          "total": "1320000"
+        },
+        "infant": {
+          "base": "144320",
+          "taxes_and_fees": "31680",
+          "total": "176000"
+        }
+      },
+      "supported_cabins": [
+        "economy",
+        "premium_economy",
+        "business",
+        "first"
+      ],
+      "baggage": {
+        "checked_pieces": 1,
+        "checked_weight_kg": "20",
+        "cabin_pieces": 1
+      },
+      "fare_conditions": {
+        "change_allowed": true,
+        "cancellation_allowed": true,
+        "refundable": true,
+        "description": "Synthetic test fare - not bookable"
+      },
+      "segments": [
+        {
+          "origin": "HAN",
+          "destination": "CXR",
+          "departure_local_time": "06:50",
+          "duration_minutes": 115,
+          "marketing_carrier": "VN",
+          "operating_carrier": "VN",
+          "flight_number": "VN1553",
+          "aircraft_code": "SYN"
+        }
+      ]
+    },
+    {
+      "route": "HAN-CXR",
+      "provider_offer_id": "SYN-HAN-CXR-VJ773",
+      "carrier": "VJ",
+      "flight_number": "VJ773",
+      "departure_local_time": "12:15",
+      "duration_minutes": 120,
+      "stops": 0,
+      "adult_total_vnd": "1310000",
+      "seats": 7,
+      "checked_weight_kg": "20",
+      "fare_brand": "Synthetic Eco",
+      "passenger_prices_vnd": {
+        "adult": {
+          "base": "1074200",
+          "taxes_and_fees": "235800",
+          "total": "1310000"
+        },
+        "child": {
+          "base": "805650",
+          "taxes_and_fees": "176850",
+          "total": "982500"
+        },
+        "infant": {
+          "base": "107420",
+          "taxes_and_fees": "23580",
+          "total": "131000"
+        }
+      },
+      "supported_cabins": [
+        "economy",
+        "premium_economy",
+        "business",
+        "first"
+      ],
+      "baggage": {
+        "checked_pieces": 1,
+        "checked_weight_kg": "20",
+        "cabin_pieces": 1
+      },
+      "fare_conditions": {
+        "change_allowed": true,
+        "cancellation_allowed": true,
+        "refundable": true,
+        "description": "Synthetic test fare - not bookable"
+      },
+      "segments": [
+        {
+          "origin": "HAN",
+          "destination": "CXR",
+          "departure_local_time": "12:15",
+          "duration_minutes": 120,
+          "marketing_carrier": "VJ",
+          "operating_carrier": "VJ",
+          "flight_number": "VJ773",
+          "aircraft_code": "SYN"
+        }
+      ]
+    },
+    {
+      "route": "HAN-CXR",
+      "provider_offer_id": "SYN-HAN-CXR-QH1413",
+      "carrier": "QH",
+      "flight_number": "QH1413",
+      "departure_local_time": "18:00",
+      "duration_minutes": 125,
+      "stops": 0,
+      "adult_total_vnd": "1440000",
+      "seats": 6,
+      "checked_weight_kg": "20",
+      "fare_brand": "Synthetic Smart",
+      "passenger_prices_vnd": {
+        "adult": {
+          "base": "1180800",
+          "taxes_and_fees": "259200",
+          "total": "1440000"
+        },
+        "child": {
+          "base": "885600",
+          "taxes_and_fees": "194400",
+          "total": "1080000"
+        },
+        "infant": {
+          "base": "118080",
+          "taxes_and_fees": "25920",
+          "total": "144000"
+        }
+      },
+      "supported_cabins": [
+        "economy",
+        "premium_economy",
+        "business",
+        "first"
+      ],
+      "baggage": {
+        "checked_pieces": 1,
+        "checked_weight_kg": "20",
+        "cabin_pieces": 1
+      },
+      "fare_conditions": {
+        "change_allowed": true,
+        "cancellation_allowed": true,
+        "refundable": true,
+        "description": "Synthetic test fare - not bookable"
+      },
+      "segments": [
+        {
+          "origin": "HAN",
+          "destination": "CXR",
+          "departure_local_time": "18:00",
+          "duration_minutes": 125,
+          "marketing_carrier": "QH",
+          "operating_carrier": "QH",
+          "flight_number": "QH1413",
+          "aircraft_code": "SYN"
+        }
+      ]
+    },
+    {
+      "route": "HAN-BKK",
+      "provider_offer_id": "SYN-HAN-BKK-VN701",
+      "carrier": "VN",
+      "flight_number": "VN701",
+      "departure_local_time": "08:00",
+      "duration_minutes": 190,
+      "stops": 0,
+      "adult_total_vnd": "1850000",
+      "seats": 9,
+      "checked_weight_kg": "20",
+      "fare_brand": "Synthetic Flex",
+      "passenger_prices_vnd": {
+        "adult": {
+          "base": "1517000",
+          "taxes_and_fees": "333000",
+          "total": "1850000"
+        },
+        "child": {
+          "base": "1137750",
+          "taxes_and_fees": "249750",
+          "total": "1387500"
+        },
+        "infant": {
+          "base": "151700",
+          "taxes_and_fees": "33300",
+          "total": "185000"
+        }
+      },
+      "supported_cabins": [
+        "economy",
+        "premium_economy",
+        "business",
+        "first"
+      ],
+      "baggage": {
+        "checked_pieces": 1,
+        "checked_weight_kg": "20",
+        "cabin_pieces": 1
+      },
+      "fare_conditions": {
+        "change_allowed": true,
+        "cancellation_allowed": true,
+        "refundable": true,
+        "description": "Synthetic test fare - not bookable"
+      },
+      "segments": [
+        {
+          "origin": "HAN",
+          "destination": "BKK",
+          "departure_local_time": "08:00",
+          "duration_minutes": 190,
+          "marketing_carrier": "VN",
+          "operating_carrier": "VN",
+          "flight_number": "VN701",
+          "aircraft_code": "SYN"
+        }
+      ]
+    },
+    {
+      "route": "HAN-DMK",
+      "provider_offer_id": "SYN-HAN-DMK-VN703",
+      "carrier": "VN",
+      "flight_number": "VN703",
+      "departure_local_time": "10:00",
+      "duration_minutes": 190,
+      "stops": 0,
+      "adult_total_vnd": "1850000",
+      "seats": 9,
+      "checked_weight_kg": "20",
+      "fare_brand": "Synthetic Flex",
+      "passenger_prices_vnd": {
+        "adult": {
+          "base": "1517000",
+          "taxes_and_fees": "333000",
+          "total": "1850000"
+        },
+        "child": {
+          "base": "1137750",
+          "taxes_and_fees": "249750",
+          "total": "1387500"
+        },
+        "infant": {
+          "base": "151700",
+          "taxes_and_fees": "33300",
+          "total": "185000"
+        }
+      },
+      "supported_cabins": [
+        "economy",
+        "premium_economy",
+        "business",
+        "first"
+      ],
+      "baggage": {
+        "checked_pieces": 1,
+        "checked_weight_kg": "20",
+        "cabin_pieces": 1
+      },
+      "fare_conditions": {
+        "change_allowed": true,
+        "cancellation_allowed": true,
+        "refundable": true,
+        "description": "Synthetic test fare - not bookable"
+      },
+      "segments": [
+        {
+          "origin": "HAN",
+          "destination": "DMK",
+          "departure_local_time": "10:00",
+          "duration_minutes": 190,
+          "marketing_carrier": "VN",
+          "operating_carrier": "VN",
+          "flight_number": "VN703",
+          "aircraft_code": "SYN"
+        }
+      ]
+    },
+    {
+      "route": "HAN-SIN",
+      "provider_offer_id": "SYN-HAN-SIN-VN705",
+      "carrier": "VN",
+      "flight_number": "VN705",
+      "departure_local_time": "07:30",
+      "duration_minutes": 210,
+      "stops": 0,
+      "adult_total_vnd": "1850000",
+      "seats": 9,
+      "checked_weight_kg": "20",
+      "fare_brand": "Synthetic Flex",
+      "passenger_prices_vnd": {
+        "adult": {
+          "base": "1517000",
+          "taxes_and_fees": "333000",
+          "total": "1850000"
+        },
+        "child": {
+          "base": "1137750",
+          "taxes_and_fees": "249750",
+          "total": "1387500"
+        },
+        "infant": {
+          "base": "151700",
+          "taxes_and_fees": "33300",
+          "total": "185000"
+        }
+      },
+      "supported_cabins": [
+        "economy",
+        "premium_economy",
+        "business",
+        "first"
+      ],
+      "baggage": {
+        "checked_pieces": 1,
+        "checked_weight_kg": "20",
+        "cabin_pieces": 1
+      },
+      "fare_conditions": {
+        "change_allowed": true,
+        "cancellation_allowed": true,
+        "refundable": true,
+        "description": "Synthetic test fare - not bookable"
+      },
+      "segments": [
+        {
+          "origin": "HAN",
+          "destination": "SIN",
+          "departure_local_time": "07:30",
+          "duration_minutes": 210,
+          "marketing_carrier": "VN",
+          "operating_carrier": "VN",
+          "flight_number": "VN705",
+          "aircraft_code": "SYN"
+        }
+      ]
+    }
+  ]
+}

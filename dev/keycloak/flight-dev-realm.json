@@ -1,0 +1,66 @@
+{
+  "realm": "flight-dev",
+  "enabled": true,
+  "displayName": "Flight Assistant Development",
+  "registrationAllowed": false,
+  "resetPasswordAllowed": true,
+  "rememberMe": true,
+  "clients": [
+    {
+      "clientId": "flight-api",
+      "name": "Flight API",
+      "enabled": true,
+      "bearerOnly": true,
+      "protocol": "openid-connect"
+    },
+    {
+      "clientId": "flight-web",
+      "name": "Flight Web Development",
+      "enabled": true,
+      "publicClient": true,
+      "standardFlowEnabled": true,
+      "directAccessGrantsEnabled": false,
+      "protocol": "openid-connect",
+      "redirectUris": [
+        "http://localhost:3000/*",
+        "http://localhost:5173/*",
+        "http://localhost:8501/*"
+      ],
+      "webOrigins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:8501"
+      ],
+      "protocolMappers": [
+        {
+          "name": "flight-api-audience",
+          "protocol": "openid-connect",
+          "protocolMapper": "oidc-audience-mapper",
+          "consentRequired": false,
+          "config": {
+            "included.client.audience": "flight-api",
+            "id.token.claim": "true",
+            "access.token.claim": "true"
+          }
+        }
+      ]
+    }
+  ],
+  "users": [
+    {
+      "username": "demo",
+      "enabled": true,
+      "emailVerified": true,
+      "email": "demo@example.test",
+      "firstName": "Demo",
+      "lastName": "Traveler",
+      "credentials": [
+        {
+          "type": "password",
+          "value": "demo_dev_only",
+          "temporary": false
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,159 @@
+{
+  "schema_version": 1,
+  "airports": [
+    {
+      "iata_code": "HAN",
+      "city_name_en": "Hanoi",
+      "city_name_vi": "Hà Nội",
+      "airport_name_en": "Noi Bai International Airport",
+      "airport_name_vi": "Sân bay quốc tế Nội Bài",
+      "timezone": "Asia/Ho_Chi_Minh",
+      "latitude": "21.2212",
+      "longitude": "105.8072",
+      "aliases": ["HAN", "Hanoi", "Ha Noi", "Hà Nội", "Noi Bai", "Nội Bài"]
+    },
+    {
+      "iata_code": "SGN",
+      "city_name_en": "Ho Chi Minh City",
+      "city_name_vi": "Thành phố Hồ Chí Minh",
+      "airport_name_en": "Tan Son Nhat International Airport",
+      "airport_name_vi": "Sân bay quốc tế Tân Sơn Nhất",
+      "timezone": "Asia/Ho_Chi_Minh",
+      "latitude": "10.8188",
+      "longitude": "106.6520",
+      "aliases": ["SGN", "Saigon", "Sai Gon", "Sài Gòn", "Ho Chi Minh City", "Ho Chi Minh", "Hồ Chí Minh", "TP Ho Chi Minh", "TP Hồ Chí Minh", "TP HCM", "Tan Son Nhat", "Tân Sơn Nhất"]
+    },
+    {
+      "iata_code": "DAD",
+      "city_name_en": "Da Nang",
+      "city_name_vi": "Đà Nẵng",
+      "airport_name_en": "Da Nang International Airport",
+      "airport_name_vi": "Sân bay quốc tế Đà Nẵng",
+      "timezone": "Asia/Ho_Chi_Minh",
+      "latitude": "16.0439",
+      "longitude": "108.1994",
+      "aliases": ["DAD", "Da Nang", "Đà Nẵng", "San bay Da Nang", "Sân bay Đà Nẵng"]
+    },
+    {
+      "iata_code": "PQC",
+      "city_name_en": "Phu Quoc",
+      "city_name_vi": "Phú Quốc",
+      "airport_name_en": "Phu Quoc International Airport",
+      "airport_name_vi": "Sân bay quốc tế Phú Quốc",
+      "timezone": "Asia/Ho_Chi_Minh",
+      "latitude": "10.1698",
+      "longitude": "103.9931",
+      "aliases": ["PQC", "Phu Quoc", "Phú Quốc", "Duong To", "Dương Tơ"]
+    },
+    {
+      "iata_code": "CXR",
+      "city_name_en": "Nha Trang",
+      "city_name_vi": "Nha Trang",
+      "airport_name_en": "Cam Ranh International Airport",
+      "airport_name_vi": "Sân bay quốc tế Cam Ranh",
+      "timezone": "Asia/Ho_Chi_Minh",
+      "latitude": "11.9982",
+      "longitude": "109.2194",
+      "aliases": ["CXR", "Nha Trang", "Cam Ranh", "San bay Cam Ranh", "Sân bay Cam Ranh"]
+    },
+    {
+      "iata_code": "HPH",
+      "city_name_en": "Hai Phong",
+      "city_name_vi": "Hải Phòng",
+      "airport_name_en": "Cat Bi International Airport",
+      "airport_name_vi": "Sân bay quốc tế Cát Bi",
+      "timezone": "Asia/Ho_Chi_Minh",
+      "latitude": "20.8194",
+      "longitude": "106.7249",
+      "aliases": ["HPH", "Hai Phong", "Hải Phòng", "Cat Bi", "Cát Bi"]
+    },
+    {
+      "iata_code": "HUI",
+      "city_name_en": "Hue",
+      "city_name_vi": "Huế",
+      "airport_name_en": "Phu Bai International Airport",
+      "airport_name_vi": "Sân bay quốc tế Phú Bài",
+      "timezone": "Asia/Ho_Chi_Minh",
+      "latitude": "16.4015",
+      "longitude": "107.7026",
+      "aliases": ["HUI", "Hue", "Huế", "Phu Bai", "Phú Bài"]
+    },
+    {
+      "iata_code": "VCA",
+      "city_name_en": "Can Tho",
+      "city_name_vi": "Cần Thơ",
+      "airport_name_en": "Can Tho International Airport",
+      "airport_name_vi": "Sân bay quốc tế Cần Thơ",
+      "timezone": "Asia/Ho_Chi_Minh",
+      "latitude": "10.0851",
+      "longitude": "105.7119",
+      "aliases": ["VCA", "Can Tho", "Cần Thơ", "Tra Noc", "Trà Nóc"]
+    },
+    {
+      "iata_code": "DLI",
+      "city_name_en": "Da Lat",
+      "city_name_vi": "Đà Lạt",
+      "airport_name_en": "Lien Khuong International Airport",
+      "airport_name_vi": "Sân bay quốc tế Liên Khương",
+      "timezone": "Asia/Ho_Chi_Minh",
+      "latitude": "11.7500",
+      "longitude": "108.3733",
+      "aliases": ["DLI", "Da Lat", "Đà Lạt", "Lien Khuong", "Liên Khương"]
+    },
+    {
+      "iata_code": "BKK",
+      "city_name_en": "Bangkok",
+      "city_name_vi": "Bangkok",
+      "airport_name_en": "Suvarnabhumi Airport",
+      "airport_name_vi": "Sân bay Suvarnabhumi",
+      "timezone": "Asia/Bangkok",
+      "latitude": "13.6900",
+      "longitude": "100.7501",
+      "aliases": ["BKK", "Bangkok", "Suvarnabhumi", "Thailand", "Thai", "Thái Lan"]
+    },
+    {
+      "iata_code": "DMK",
+      "city_name_en": "Bangkok Don Mueang",
+      "city_name_vi": "Bangkok Don Mueang",
+      "airport_name_en": "Don Mueang International Airport",
+      "airport_name_vi": "Sân bay quốc tế Don Mueang",
+      "timezone": "Asia/Bangkok",
+      "latitude": "13.9126",
+      "longitude": "100.6068",
+      "aliases": ["DMK", "Don Mueang"]
+    },
+    {
+      "iata_code": "HKT",
+      "city_name_en": "Phuket",
+      "city_name_vi": "Phuket",
+      "airport_name_en": "Phuket International Airport",
+      "airport_name_vi": "Sân bay quốc tế Phuket",
+      "timezone": "Asia/Bangkok",
+      "latitude": "8.1132",
+      "longitude": "98.3169",
+      "aliases": ["HKT", "Phuket"]
+    },
+    {
+      "iata_code": "CNX",
+      "city_name_en": "Chiang Mai",
+      "city_name_vi": "Chiang Mai",
+      "airport_name_en": "Chiang Mai International Airport",
+      "airport_name_vi": "Sân bay quốc tế Chiang Mai",
+      "timezone": "Asia/Bangkok",
+      "latitude": "18.7668",
+      "longitude": "98.9626",
+      "aliases": ["CNX", "Chiang Mai"]
+    },
+    {
+      "iata_code": "KBV",
+      "city_name_en": "Krabi",
+      "city_name_vi": "Krabi",
+      "airport_name_en": "Krabi International Airport",
+      "airport_name_vi": "Sân bay quốc tế Krabi",
+      "timezone": "Asia/Bangkok",
+      "latitude": "8.0991",
+      "longitude": "98.9862",
+      "aliases": ["KBV", "Krabi"]
+    }
+  ]
+}

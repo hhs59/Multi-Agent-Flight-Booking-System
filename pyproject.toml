@@ -1,53 +1,56 @@
 [build-system]
-requires = ["setuptools>=68.0.0"]
+requires = ["setuptools>=68,<82"]
 build-backend = "setuptools.build_meta"
 
 [project]
 name = "multi-agent-flight-booking"
 version = "0.1.0"
-description = "Intelligent multi-agent flight advisor with price prediction, review analysis, and booking capability"
-requires-python = ">=3.11"
+description = "Vietnam-first authenticated flight assistant with controlled booking workflows"
+requires-python = ">=3.11,<3.13"
 license = { text = "MIT" }
 
+# The baseline stays CPU-friendly and excludes model training/NLP toolchains.
 dependencies = [
-    # Agent orchestration
-    "langgraph>=0.2.0",
-    "langchain-core>=0.2.0",
-    # LLM providers
-    "langchain-groq>=0.1.0",
-    "langchain-openai>=0.1.0",
-    # Structured output
-    "pydantic>=2.0.0",
-    # API server
-    "fastapi>=0.110.0",
-    "uvicorn>=0.29.0",
-    # Frontend
-    "streamlit>=1.30.0",
-    # Async HTTP client
-    "httpx>=0.27.0",
-    # Caching
-    "cachetools>=5.3.0",
-    # ML / NLP
-    "transformers>=4.38.0",
-    "torch>=2.0.0",
-    "scikit-learn>=1.3.0",
-    # Charting
-    "matplotlib>=3.8.0",
-    # Logging
-    "python-json-logger>=2.0.0",
-    # Payments
-    "stripe>=8.0.0",
-    # Email
-    "sendgrid>=6.10.0",
-    # Web scraping
-    "beautifulsoup4>=4.12.0",
+    "alembic>=1.13,<2",
+    "cachetools>=5.3,<7",
+    "cryptography>=42,<48",
+    "email-validator>=2,<3",
+    "fastapi>=0.110,<1",
+    "httpx>=0.27,<1",
+    "langgraph>=0.2,<2",
+    "psycopg[binary]>=3.1,<4",
+    "pydantic>=2,<3",
+    "pyjwt[crypto]>=2.8,<3",
+    "python-json-logger>=2,<5",
+    "sqlalchemy>=2,<3",
+    "typing-extensions>=4.10,<5",
+    "uvicorn>=0.29,<1",
 ]
 
 [project.optional-dependencies]
+providers = []
+eval = [
+    "matplotlib>=3.8,<4",
+    "numpy>=1.26,<3",
+    "scikit-learn>=1.3,<2",
+]
+nlp = [
+    "sentence-transformers>=2.6,<6",
+    "transformers>=4.38,<6",
+]
+training = [
+    "datasets>=2.18,<5",
+    "peft>=0.10,<1",
+    "torch>=2,<3",
+    "transformers>=4.38,<6",
+    "trl>=0.8,<1",
+]
+
+[dependency-groups]
 dev = [
-    "pytest>=8.0.0",
-    "pytest-asyncio>=0.23.0",
-    "ruff>=0.3.0",
+    "pytest>=8,<10",
+    "pytest-asyncio>=0.23,<2",
+    "ruff>=0.3,<1",
 ]
 
 [project.scripts]
@@ -56,26 +59,34 @@ flight-advisor-api = "agent_system.main:app"
 [tool.setuptools.packages.find]
 where = ["src"]
 
+[tool.setuptools.package-data]
+"agent_system.providers" = ["data/*.json"]
+"agent_system.providers.mock" = ["data/*.json"]
+"agent_system.data" = ["*.json"]
+
+[tool.uv]
+default-groups = ["dev"]
+
 [tool.ruff]
 target-version = "py311"
 line-length = 100
 
 [tool.ruff.lint]
 select = [
-    "E",  # pycodestyle errors
-    "F",  # pyflakes
-    "I",  # isort
-    "N",  # naming conventions
-    "W",  # pycodestyle warnings
-    "UP", # pyupgrade
-    "B",  # flake8-bugbear
+    "E",   # pycodestyle errors
+    "F",   # pyflakes
+    "I",   # isort
+    "N",   # naming conventions
+    "W",   # pycodestyle warnings
+    "UP",  # pyupgrade
+    "B",   # flake8-bugbear
     "SIM", # flake8-simplify
     "ARG", # flake8-unused-arguments
     "C4",  # flake8-comprehensions
 ]
 ignore = [
-    "E501",  # line-too-long (handled by formatter)
-    "N806",  # non-lowercase-variable-in-function (allows UPPER_CASE constants)
+    "E501", # line-too-long (handled by formatter)
+    "N806", # non-lowercase-variable-in-function (allows UPPER_CASE constants)
 ]
 
 [tool.ruff.lint.per-file-ignores]
@@ -84,3 +95,8 @@ ignore = [
 [tool.pytest.ini_options]
 asyncio_mode = "auto"
 testpaths = ["tests"]
+addopts = "-m 'not provider'"
+markers = [
+    "postgres: requires TEST_DATABASE_URL and exercises PostgreSQL-specific behavior",
+    "provider: requires external sandbox credentials and network access",
+]

@@ -1,0 +1,7 @@
+# Compatibility entry point for pip users. The reproducible workflow uses uv.lock.
+-e .
+
+# Install provider integrations only when needed:
+#   pip install -e ".[providers]"
+# Development:
+#   uv sync

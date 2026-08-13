@@ -4,6 +4,8 @@ import sys
 
 from pythonjsonlogger.jsonlogger import JsonFormatter
 
+from agent_system.security.sanitization import SanitizingFilter
+
 
 def setup_logging() -> None:
     root_logger = logging.getLogger()
@@ -25,6 +27,7 @@ def setup_logging() -> None:
         fmt="%(timestamp)s %(name)s %(levelname)s %(message)s",
         timestamp=True,
     )
+    handler.addFilter(SanitizingFilter())
     handler.setFormatter(formatter)
 
     root_logger.handlers.clear()
