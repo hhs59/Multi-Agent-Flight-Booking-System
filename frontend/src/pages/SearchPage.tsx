@@ -3,7 +3,7 @@ import { CalendarDays, ChevronDown, Search } from 'lucide-react'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../auth/AuthProvider'
-import { createFlightDiscovery, createFlightSearch } from '../api/services'
+import { createFlightSearch } from '../api/services'
 import {
   ApiNotice,
   Button,
@@ -17,10 +17,9 @@ import {
 import { JourneyContext } from '../components/JourneyContext'
 import { OfferBookingDialog } from '../components/OfferBookingDialog'
 import { OfferList } from '../components/FlightOfferCard'
-import type { Cabin, DiscoveryResponse, Offer, SearchResponse } from '../types/api'
+import type { Cabin, Offer, SearchResponse } from '../types/api'
 
-type SearchMode = 'exact' | 'flexible'
-type SearchResult = SearchResponse | DiscoveryResponse
+type SearchResult = SearchResponse
 
 const dateAfter = (days: number): string => {
   const value = new Date()
@@ -31,19 +30,15 @@ const dateAfter = (days: number): string => {
 export function SearchPage() {
   const navigate = useNavigate()
   const { restoreSecureSession, isRestoringSession } = useAuth()
-  const [mode, setMode] = useState<SearchMode>('exact')
   const [origin, setOrigin] = useState('SGN')
   const [destination, setDestination] = useState('HAN')
-  const [destinations, setDestinations] = useState('HAN, BKK')
   const [departureDate, setDepartureDate] = useState(dateAfter(14))
   const [returnDate, setReturnDate] = useState('')
-  const [endDate, setEndDate] = useState(dateAfter(21))
   const [cabin, setCabin] = useState<Cabin>('economy')
   const [adults, setAdults] = useState('1')
   const [children, setChildren] = useState('0')
   const [infants, setInfants] = useState('0')
   const [maxStops, setMaxStops] = useState('')
-  const [baggageRequired, setBaggageRequired] = useState(false)
   const [formError, setFormError] = useState<string | null>(null)
   const [result, setResult] = useState<SearchResult | null>(null)
   const [selectedOffer, setSelectedOffer] = useState<Offer | null>(null)
@@ -53,52 +48,21 @@ export function SearchPage() {
       const normalizedOrigin = origin.trim().toUpperCase()
       if (normalizedOrigin.length !== 3) throw new Error('Enter a three-letter origin airport.')
       const stopCount = maxStops === '' ? null : Number(maxStops)
-      if (mode === 'exact') {
-        const normalizedDestination = destination.trim().toUpperCase()
-        if (normalizedDestination.length !== 3)
-          throw new Error('Enter a three-letter destination airport.')
-        if (!departureDate) throw new Error('Choose a departure date.')
-        return createFlightSearch({
-          origin: normalizedOrigin,
-          destination: normalizedDestination,
-          departure_date: departureDate,
-          return_date: returnDate || null,
-          adults: Number(adults),
-          children: Number(children),
-          infants: Number(infants),
-          cabin,
-          currency: 'VND',
-          max_stops: stopCount,
-        })
-      }
-      const airportList = destinations
-        .split(',')
-        .map((value) => value.trim().toUpperCase())
-        .filter(Boolean)
-      if (!airportList.length || airportList.some((value) => value.length !== 3)) {
-        throw new Error('Add one or more three-letter destination airports.')
-      }
-      if (!departureDate || !endDate) throw new Error('Choose a date window.')
-      return createFlightDiscovery({
-        status: 'executable',
-        resolved_origin: normalizedOrigin,
-        destination_airports: airportList.slice(0, 5),
-        date_window: {
-          start_date: departureDate,
-          end_date: endDate,
-          precision: departureDate === endDate ? 'exact' : 'range',
-          timezone: 'Asia/Ho_Chi_Minh',
-          parser_confidence: 1,
-        },
-        passengers: {
-          adults: Number(adults),
-          children: Number(children),
-          infants: Number(infants),
-        },
+      const normalizedDestination = destination.trim().toUpperCase()
+      if (normalizedDestination.length !== 3)
+        throw new Error('Enter a three-letter destination airport.')
+      if (!departureDate) throw new Error('Choose a departure date.')
+      return createFlightSearch({
+        origin: normalizedOrigin,
+        destination: normalizedDestination,
+        departure_date: departureDate,
+        return_date: returnDate || null,
+        adults: Number(adults),
+        children: Number(children),
+        infants: Number(infants),
         cabin,
         currency: 'VND',
         max_stops: stopCount,
-        baggage_required: baggageRequired,
       })
     },
     onSuccess: (data) => {
@@ -120,22 +84,6 @@ export function SearchPage() {
         <h1>Flights</h1>
       </div>
       <Card className="search-panel">
-        <div className="mode-tabs" role="tablist" aria-label="Search mode">
-          <button
-            className={mode === 'exact' ? 'mode-tab mode-tab-active' : 'mode-tab'}
-            type="button"
-            onClick={() => setMode('exact')}
-          >
-            Round trip
-          </button>
-          <button
-            className={mode === 'flexible' ? 'mode-tab mode-tab-active' : 'mode-tab'}
-            type="button"
-            onClick={() => setMode('flexible')}
-          >
-            Flexible
-          </button>
-        </div>
         <div className="search-primary-grid">
           <Field className="search-origin" label="From" required>
             <Input
@@ -148,41 +96,29 @@ export function SearchPage() {
           </Field>
           <Field
             className="search-destination"
-            label={mode === 'exact' ? 'To' : 'Destinations'}
+            label="To"
             required
           >
             <Input
-              value={mode === 'exact' ? destination : destinations}
-              onChange={(event) =>
-                mode === 'exact'
-                  ? setDestination(event.target.value)
-                  : setDestinations(event.target.value)
-              }
-              placeholder={mode === 'exact' ? 'HAN' : 'HAN, BKK'}
+              value={destination}
+              onChange={(event) => setDestination(event.target.value)}
+              placeholder="HAN"
               aria-label="Destination airport"
             />
           </Field>
-          <Field
-            className="search-date"
-            label={mode === 'exact' ? 'Departure' : 'From date'}
-            required
-          >
+          <Field className="search-date" label="Departure" required>
             <Input
               type="date"
               value={departureDate}
               onChange={(event) => setDepartureDate(event.target.value)}
             />
           </Field>
-          <Field className="search-date" label={mode === 'exact' ? 'Return' : 'To date'}>
+          <Field className="search-date" label="Return">
             <Input
               type="date"
-              value={mode === 'exact' ? returnDate : endDate}
+              value={returnDate}
               min={departureDate}
-              onChange={(event) =>
-                mode === 'exact'
-                  ? setReturnDate(event.target.value)
-                  : setEndDate(event.target.value)
-              }
+              onChange={(event) => setReturnDate(event.target.value)}
             />
           </Field>
           <Button
@@ -251,16 +187,6 @@ export function SearchPage() {
                 <option value="2">Up to 2 stops</option>
               </Select>
             </Field>
-            {mode === 'flexible' ? (
-              <label className="check-field search-baggage">
-                <input
-                  type="checkbox"
-                  checked={baggageRequired}
-                  onChange={(event) => setBaggageRequired(event.target.checked)}
-                />
-                <span>Checked baggage</span>
-              </label>
-            ) : null}
           </div>
         </details>
         {formError ? (
