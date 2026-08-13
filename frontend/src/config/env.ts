@@ -9,6 +9,7 @@ export const env = {
   apiBaseUrl: readEnv('VITE_API_BASE_URL', 'http://localhost:8000'),
   oidcAuthority: readEnv('VITE_OIDC_AUTHORITY', 'http://localhost:8080/realms/flight-dev'),
   oidcClientId: readEnv('VITE_OIDC_CLIENT_ID', 'flight-web'),
+  oidcAudience: readEnv('VITE_OIDC_AUDIENCE', 'flight-api'),
   oidcRedirectUri: readEnv('VITE_OIDC_REDIRECT_URI', origin + '/auth/callback'),
   oidcSilentRedirectUri: readEnv('VITE_OIDC_SILENT_REDIRECT_URI', origin + '/auth/silent-callback'),
   oidcPostLogoutRedirectUri: readEnv('VITE_OIDC_POST_LOGOUT_REDIRECT_URI', origin + '/login'),

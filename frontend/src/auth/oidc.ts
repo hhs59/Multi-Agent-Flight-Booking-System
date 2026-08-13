@@ -21,6 +21,9 @@ const settings: UserManagerSettings = {
   post_logout_redirect_uri: env.oidcPostLogoutRedirectUri,
   response_type: 'code',
   scope: 'openid profile email',
+  extraQueryParams: {
+    audience: env.oidcAudience,
+  },
   stateStore: new WebStorageStateStore({ store: transientStorage }),
   userStore: new WebStorageStateStore({ store: new InMemoryWebStorage() }),
   monitorSession: false,

@@ -27,7 +27,9 @@ def _environment_flag(name: str, *, default: bool = False) -> bool:
 
 
 def auth_runtime_from_environment() -> AuthRuntime:
-    issuer = _required_environment("OIDC_ISSUER").rstrip("/")
+    # OIDC issuer values are compared exactly against the token's `iss` claim.
+    # Auth0 includes the trailing slash, so preserve the configured issuer URL.
+    issuer = _required_environment("OIDC_ISSUER").strip()
     audience = _required_environment("OIDC_AUDIENCE")
     jwks_url = _required_environment("OIDC_JWKS_URL")
     session_hours = int(os.environ.get("SESSION_LIFETIME_HOURS", "12"))
