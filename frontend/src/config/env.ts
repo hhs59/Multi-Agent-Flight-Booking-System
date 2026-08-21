@@ -14,5 +14,6 @@ export const env = {
   oidcSilentRedirectUri: readEnv('VITE_OIDC_SILENT_REDIRECT_URI', origin + '/auth/silent-callback'),
   oidcPostLogoutRedirectUri: readEnv('VITE_OIDC_POST_LOGOUT_REDIRECT_URI', origin + '/login'),
   defaultLocale: readEnv('VITE_DEFAULT_LOCALE', 'vi') === 'en' ? 'en' : 'vi',
+  googleClientId: readEnv('VITE_GOOGLE_CLIENT_ID', ''),
   diagnosticsEnabled: readEnv('VITE_ENABLE_DEV_DIAGNOSTICS', 'false') === 'true',
 } as const

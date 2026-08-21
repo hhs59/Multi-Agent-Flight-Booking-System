@@ -4,11 +4,13 @@ import {
   useEffect,
   useId,
   useRef,
+  useState,
   type ButtonHTMLAttributes,
   type InputHTMLAttributes,
   type ReactNode,
   type SelectHTMLAttributes,
 } from 'react'
+import { createPortal } from 'react-dom'
 import { Link } from 'react-router-dom'
 import { isApiError, isCsrfError } from '../api/errors'
 
@@ -252,7 +254,7 @@ export function Modal({
     const focusFirst = (): void => {
       const preferred = dialog?.querySelector<HTMLElement>('[data-autofocus]:not([disabled])')
       const first = preferred || dialog?.querySelector<HTMLElement>(focusableSelector)
-      ;(first || dialog)?.focus()
+      ;(first || dialog)?.focus({ preventScroll: true })
     }
     const focusableElements = (): HTMLElement[] =>
       dialog ? Array.from(dialog.querySelectorAll<HTMLElement>(focusableSelector)) : []
@@ -298,7 +300,7 @@ export function Modal({
   }, [open])
 
   if (!open) return null
-  return (
+  return createPortal(
     <div
       className="modal-backdrop"
       role="presentation"
@@ -330,7 +332,8 @@ export function Modal({
         <div className="modal-body">{children}</div>
         {footer ? <div className="modal-footer">{footer}</div> : null}
       </div>
-    </div>
+    </div>,
+    document.body,
   )
 }
 
@@ -338,7 +341,8 @@ export function ConfirmDialog({
   open,
   title,
   message,
-  confirmLabel = 'Confirm',
+  confirmLabel = 'Xác nhận',
+  cancelLabel = 'Hủy bỏ',
   danger = false,
   onCancel,
   onConfirm,
@@ -348,6 +352,7 @@ export function ConfirmDialog({
   title: string
   message: string
   confirmLabel?: string
+  cancelLabel?: string
   danger?: boolean
   onCancel: () => void
   onConfirm: () => void
@@ -362,16 +367,100 @@ export function ConfirmDialog({
       disableClose={loading}
       footer={
         <>
-          <Button variant="ghost" onClick={onCancel}>
-            Cancel
+          <Button variant="secondary" onClick={onCancel} disabled={loading}>
+            {cancelLabel}
           </Button>
-          <Button variant={danger ? 'danger' : 'primary'} loading={loading} onClick={onConfirm}>
+          <Button
+            variant={danger ? 'danger' : 'primary'}
+            loading={loading}
+            onClick={onConfirm}
+            data-autofocus
+          >
             {confirmLabel}
           </Button>
         </>
       }
     >
-      <p className="modal-message">{message}</p>
+      <div className="confirm-dialog-content">
+        {danger ? (
+          <div className="confirm-icon-danger">
+            <AlertCircle size={22} />
+          </div>
+        ) : null}
+        <p className="modal-message">{message}</p>
+      </div>
+    </Modal>
+  )
+}
+
+export function PromptDialog({
+  open,
+  title,
+  subtitle,
+  defaultValue = '',
+  placeholder = '',
+  confirmLabel = 'Lưu thay đổi',
+  cancelLabel = 'Hủy bỏ',
+  onCancel,
+  onConfirm,
+  loading = false,
+}: {
+  open: boolean
+  title: string
+  subtitle?: string
+  defaultValue?: string
+  placeholder?: string
+  confirmLabel?: string
+  cancelLabel?: string
+  onCancel: () => void
+  onConfirm: (value: string) => void
+  loading?: boolean
+}) {
+  const [val, setVal] = useState(defaultValue)
+
+  useEffect(() => {
+    if (open) setVal(defaultValue)
+  }, [open, defaultValue])
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    if (val.trim()) onConfirm(val.trim())
+  }
+
+  return (
+    <Modal
+      open={open}
+      title={title}
+      onClose={onCancel}
+      disableEscape={loading}
+      disableClose={loading}
+      footer={
+        <>
+          <Button variant="secondary" onClick={onCancel} disabled={loading}>
+            {cancelLabel}
+          </Button>
+          <Button
+            variant="primary"
+            loading={loading}
+            disabled={!val.trim()}
+            onClick={handleSubmit}
+            data-autofocus
+          >
+            {confirmLabel}
+          </Button>
+        </>
+      }
+    >
+      <form onSubmit={handleSubmit} className="prompt-dialog-form">
+        {subtitle ? <p className="prompt-dialog-subtitle">{subtitle}</p> : null}
+        <Input
+          value={val}
+          onChange={(e) => setVal(e.target.value)}
+          placeholder={placeholder}
+          autoFocus
+          className="prompt-dialog-input"
+        />
+      </form>
     </Modal>
   )
 }

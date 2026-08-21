@@ -7,6 +7,7 @@ import { BookingDetailPage, BookingsPage } from '../pages/BookingsPage'
 import { BookingIntentPage } from '../pages/BookingIntentPage'
 import { LoginPage } from '../pages/LoginPage'
 import { NotFoundPage } from '../pages/NotFoundPage'
+import { OperationsPage } from '../pages/OperationsPage'
 import { SearchPage } from '../pages/SearchPage'
 import { TravelersPage } from '../pages/TravelersPage'
 import { WatchesPage } from '../pages/WatchesPage'
@@ -32,6 +33,8 @@ export function AppRouter() {
           <Route path="/bookings" element={<BookingsPage />} />
           <Route path="/bookings/:bookingId" element={<BookingDetailPage />} />
           <Route path="/watches" element={<WatchesPage />} />
+          <Route path="/operations" element={<OperationsPage />} />
+          <Route path="/admin" element={<Navigate to="/operations" replace />} />
           <Route path="*" element={<NotFoundPage />} />
         </Route>
       </Route>

@@ -18,9 +18,14 @@ from agent_system.providers.errors import IdempotencyConflictError
 
 class MockNotificationProvider:
     name = "mock"
-    environment = ExecutionMode.MOCK
 
-    def __init__(self, *, clock: Clock | None = None) -> None:
+    def __init__(
+        self,
+        *,
+        environment: ExecutionMode = ExecutionMode.MOCK,
+        clock: Clock | None = None,
+    ) -> None:
+        self.environment = environment
         self.clock = clock or SystemClock()
         self.accepted_messages: list[dict[str, JsonValue]] = []
         self._results: dict[str, tuple[str, NotificationResult]] = {}

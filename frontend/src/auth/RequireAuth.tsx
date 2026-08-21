@@ -1,20 +1,27 @@
 import { Navigate, Outlet, useLocation } from 'react-router-dom'
 import { useAuth } from './AuthProvider'
-import { LoadingScreen } from '../components/ui'
+import { Plane } from 'lucide-react'
 
 export function RequireAuth() {
   const { status } = useAuth()
   const location = useLocation()
 
-  if (status === 'loading') return <LoadingScreen label="Restoring your secure session..." />
-  if (status !== 'authenticated') {
+  if (status === 'loading') {
     return (
-      <Navigate
-        to="/login"
-        replace
-        state={{ from: location.pathname + location.search + location.hash }}
-      />
+      <div className="auth-loading-screen">
+        <div className="auth-loading-card">
+          <div className="auth-loading-spinner">
+            <Plane className="animate-pulse" size={28} />
+          </div>
+          <p>Đang kiểm tra phiên làm việc...</p>
+        </div>
+      </div>
     )
   }
+
+  if (status === 'unauthenticated') {
+    return <Navigate to="/login" state={{ from: location }} replace />
+  }
+
   return <Outlet />
 }

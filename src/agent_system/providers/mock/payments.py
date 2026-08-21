@@ -26,14 +26,15 @@ ResultT = TypeVar("ResultT", PaymentMethodSetupResult, PaymentResult)
 
 class MockPaymentProvider:
     name = "mock"
-    environment = ExecutionMode.MOCK
 
     def __init__(
         self,
         *,
+        environment: ExecutionMode = ExecutionMode.MOCK,
         scenario: MockScenario = MockScenario.PAYMENT_SUCCESS,
         clock: Clock | None = None,
     ) -> None:
+        self.environment = environment
         self.scenario = scenario
         self.clock = clock or SystemClock()
         self._results: dict[tuple[str, str], tuple[str, object]] = {}

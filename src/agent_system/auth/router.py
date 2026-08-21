@@ -46,6 +46,12 @@ class CurrentUserResponse(BaseModel):
     timezone: str
 
 
+class LocalLoginRequest(BaseModel):
+    email: str
+    password: str
+
+
+
 @dataclass(frozen=True)
 class AuthRuntime:
     session_factory: Callable[[], Session]
@@ -153,6 +159,29 @@ def create_auth_router(runtime: AuthRuntime) -> APIRouter:
             "response_type": "code",
             "scope": "openid profile email",
         }
+
+    @router.post("/login/local")
+    def login_local(payload: LocalLoginRequest):
+        """Perform local/demo credential login."""
+        clean_email = payload.email.strip().lower()
+        if not clean_email or not payload.password:
+            raise HTTPException(status.HTTP_400_BAD_REQUEST, "Email and password are required")
+        display_name = clean_email.split("@")[0].capitalize()
+        if clean_email == "demo@example.test":
+            display_name = "Demo Traveler"
+        elif clean_email == "captain@waypoint.dev":
+            display_name = "Captain Alex Nguyen"
+        elif clean_email == "vip@waypoint.dev":
+            display_name = "VIP Concierge"
+
+        return {
+            "user_id": f"usr_local_{clean_email.replace('@', '_').replace('.', '_')}",
+            "email": clean_email,
+            "display_name": display_name,
+            "locale": "vi",
+            "timezone": "Asia/Ho_Chi_Minh",
+        }
+
 
     @router.post("/logout", status_code=status.HTTP_204_NO_CONTENT)
     def logout(

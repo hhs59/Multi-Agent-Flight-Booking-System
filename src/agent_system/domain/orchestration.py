@@ -541,6 +541,17 @@ class AdviceResult(DomainModel):
     text: str = Field(min_length=1, max_length=12_000)
     limitations: tuple[str, ...] = Field(default_factory=tuple, max_length=12)
 
+    @field_validator("limitations", mode="before")
+    @classmethod
+    def _normalize_limitations(cls, value: Any) -> tuple[str, ...]:
+        if value is None or value == "":
+            return ()
+        if isinstance(value, str):
+            return (value,)
+        if isinstance(value, (list, tuple, set)):
+            return tuple(str(x) for x in value if x)
+        return ()
+
 
 class LLMCallMetadata(DomainModel):
     provider: str = Field(min_length=1, max_length=80)

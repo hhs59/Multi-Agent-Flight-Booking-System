@@ -30,14 +30,15 @@ _WEATHER = {
 
 class MockWeatherProvider:
     name = "mock"
-    environment = ExecutionMode.MOCK
 
     def __init__(
         self,
         *,
+        environment: ExecutionMode = ExecutionMode.MOCK,
         scenario: MockScenario = MockScenario.SUCCESS,
         clock: Clock | None = None,
     ) -> None:
+        self.environment = environment
         self.scenario = scenario
         self.clock = clock or SystemClock()
 

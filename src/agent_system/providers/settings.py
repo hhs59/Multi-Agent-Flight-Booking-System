@@ -98,8 +98,10 @@ class ProviderSettings:
         if self.execution_mode is ExecutionMode.MOCK:
             if any(selected != "mock" for selected in selections.values()):
                 raise ValueError("mock execution mode can select only mock providers")
-        elif any(selected == "mock" for selected in selections.values()):
-            raise ValueError("sandbox and production modes cannot select mock providers")
+        elif self.execution_mode is ExecutionMode.PRODUCTION and any(
+            selected == "mock" for selected in selections.values()
+        ):
+            raise ValueError("production mode cannot select mock providers")
         if self.execution_mode is ExecutionMode.PRODUCTION and not self.production_approved:
             raise ValueError("production providers require explicit server-side approval")
         if self.flight_provider == "duffel" and (

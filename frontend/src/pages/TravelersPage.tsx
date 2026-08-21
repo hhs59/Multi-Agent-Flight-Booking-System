@@ -1,5 +1,16 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
-import { Check, Edit3, Plus, Star, Trash2, UserRound } from 'lucide-react'
+import {
+  Check,
+  Edit3,
+  Filter,
+  Plus,
+  Search,
+  ShieldCheck,
+  Star,
+  Trash2,
+  UserRound,
+  UsersRound,
+} from 'lucide-react'
 import { useState } from 'react'
 import {
   createTraveler,
@@ -72,6 +83,7 @@ export function TravelersPage() {
   const [editing, setEditing] = useState<Traveler | null>(null)
   const [deleteTarget, setDeleteTarget] = useState<Traveler | null>(null)
   const [message, setMessage] = useState<string | null>(null)
+  const [searchQuery, setSearchQuery] = useState('')
 
   const refresh = async (nextMessage = 'Traveler profiles are up to date.'): Promise<void> => {
     await queryClient.invalidateQueries({ queryKey: queryKeys.travelers })
@@ -209,14 +221,97 @@ export function TravelersPage() {
 
   const updateConflict = isApiError(updateMutation.error) && updateMutation.error.status === 409
 
+  const travelers = travelersQuery.data || []
+  const totalTravelers = travelers.length
+  const defaultTraveler = travelers.find((t) => t.is_default)
+  const readyCount = travelers.filter((t) => travelerReadiness(t) !== 'incomplete').length
+
+  const filteredTravelers = travelers.filter((t) => {
+    if (!searchQuery.trim()) return true
+    const q = searchQuery.toLowerCase()
+    return (
+      t.label.toLowerCase().includes(q) ||
+      (t.given_name && t.given_name.toLowerCase().includes(q)) ||
+      (t.family_name && t.family_name.toLowerCase().includes(q)) ||
+      (t.nationality && t.nationality.toLowerCase().includes(q))
+    )
+  })
+
   return (
-    <div className="page">
-      <div className="page-header">
-        <h1>Travelers</h1>
-        <Button onClick={openCreate}>
-          <Plus size={17} /> Add traveler
+    <div className="page travelers-page-wrapper">
+      {/* Header */}
+      <div className="page-header compact-page-header">
+        <div>
+          <div className="destinations-badge">
+            <UsersRound size={14} />
+            <span>Passenger Profiles & Identity</span>
+          </div>
+          <h1>Traveler Profiles</h1>
+          <p className="section-subtitle">
+            Securely store passport and loyalty details for instant 1-click booking intents and auto-fill.
+          </p>
+        </div>
+        <Button onClick={openCreate} variant="primary">
+          <Plus size={16} /> Add New Traveler
         </Button>
       </div>
+
+      {/* Summary KPI Cards */}
+      <div className="bookings-summary-grid">
+        <div className="summary-stat-card">
+          <div className="summary-stat-icon icon-emerald">
+            <UsersRound size={22} />
+          </div>
+          <div className="summary-stat-info">
+            <span className="summary-stat-label">Saved Travelers</span>
+            <strong className="summary-stat-val">{totalTravelers}</strong>
+            <span className="summary-stat-hint">Encrypted AES-GCM</span>
+          </div>
+        </div>
+
+        <div className="summary-stat-card">
+          <div className="summary-stat-icon icon-amber">
+            <Star size={22} />
+          </div>
+          <div className="summary-stat-info">
+            <span className="summary-stat-label">Primary Passenger</span>
+            <strong className="summary-stat-val">
+              {defaultTraveler ? defaultTraveler.label : 'None'}
+            </strong>
+            <span className="summary-stat-hint">Default 1-click buyer</span>
+          </div>
+        </div>
+
+        <div className="summary-stat-card">
+          <div className="summary-stat-icon icon-green">
+            <ShieldCheck size={22} />
+          </div>
+          <div className="summary-stat-info">
+            <span className="summary-stat-label">Booking Readiness</span>
+            <strong className="summary-stat-val text-success">
+              {totalTravelers ? `${Math.round((readyCount / totalTravelers) * 100)}%` : '100%'}
+            </strong>
+            <span className="summary-stat-hint">IATA verified details</span>
+          </div>
+        </div>
+      </div>
+
+      {/* Search Bar */}
+      {totalTravelers > 0 ? (
+        <div className="travelers-search-bar">
+          <div className="bookings-search-input-wrap">
+            <Search size={15} className="search-icon" />
+            <input
+              type="text"
+              placeholder="Search traveler by name, label, or nationality..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="bookings-search-input"
+            />
+          </div>
+        </div>
+      ) : null}
+
       {message ? (
         <InfoBanner tone="success">
           <Check size={17} /> {message}
@@ -262,17 +357,21 @@ export function TravelersPage() {
       {travelersQuery.isError ? (
         <ErrorState error={travelersQuery.error} onRetry={() => void travelersQuery.refetch()} />
       ) : null}
-      {travelersQuery.data?.length === 0 ? (
+      {travelers.length === 0 && !travelersQuery.isLoading && !travelersQuery.isError ? (
         <EmptyState
-          icon={<UserRound size={23} />}
+          icon={<UserRound size={28} />}
           title="No traveler profiles yet"
-          description="Create a profile once and reuse it for future booking intents."
-          action={<Button onClick={openCreate}>Add your first traveler</Button>}
+          description="Create a profile once and reuse it for future booking intents without re-typing passport information."
+          action={
+            <Button onClick={openCreate} variant="primary">
+              <Plus size={16} /> Add Your First Traveler
+            </Button>
+          }
         />
       ) : null}
-      {travelersQuery.data?.length ? (
+      {filteredTravelers.length ? (
         <div className="profile-grid">
-          {travelersQuery.data.map((traveler) => (
+          {filteredTravelers.map((traveler) => (
             <TravelerCard
               key={traveler.id}
               traveler={traveler}
@@ -283,6 +382,19 @@ export function TravelersPage() {
             />
           ))}
         </div>
+      ) : null}
+
+      {totalTravelers > 0 && filteredTravelers.length === 0 ? (
+        <EmptyState
+          icon={<Filter size={24} />}
+          title="No travelers match your search"
+          description="Try searching with a different name or clear the search query."
+          action={
+            <Button variant="secondary" onClick={() => setSearchQuery('')}>
+              Clear Search
+            </Button>
+          }
+        />
       ) : null}
 
       <Modal
@@ -501,18 +613,23 @@ function TravelerForm({
           />
         </Field>
         <Field
-          label="Phone"
+          label="Phone (Số điện thoại 10 số)"
           hint={
             editingTraveler
-              ? `Current phone: ${editingTraveler.masked_phone || 'not set'}. Leave blank to keep the current phone.`
-              : 'Use international format, for example +84901234567.'
+              ? `Current phone: ${editingTraveler.masked_phone || 'not set'}. Leave blank to keep current phone.`
+              : 'Số điện thoại gồm tối đa 10 chữ số (chỉ nhập số)'
           }
         >
           <Input
             type="tel"
+            inputMode="numeric"
+            maxLength={10}
             value={form.phone}
-            onChange={(event) => update('phone', event.target.value)}
-            placeholder="+84..."
+            onChange={(event) => {
+              const digitsOnly = event.target.value.replace(/\D/g, '').slice(0, 10)
+              update('phone', digitsOnly)
+            }}
+            placeholder="Nhập số điện thoại (tối đa 10 số)..."
           />
         </Field>
         <Field label="Nationality" hint="Two-letter country code">

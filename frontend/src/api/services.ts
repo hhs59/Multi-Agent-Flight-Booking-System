@@ -1,5 +1,7 @@
 import type { components } from './generated/schema'
 import { apiRequest } from './client'
+import { ApiError } from './errors'
+import { localThreadStore } from './localThreadStore'
 import {
   asBooking,
   asBookingIntent,
@@ -45,48 +47,106 @@ export const createIdempotencyKey = (): string =>
     ? crypto.randomUUID()
     : 'message-' + Date.now() + '-' + Math.random().toString(16).slice(2)
 
+function isUnavailable(err: unknown): boolean {
+  if (err instanceof ApiError) {
+    return (
+      err.status === 0 ||
+      err.code === 'network_error' ||
+      err.status === 404 ||
+      err.status === 401 ||
+      err.status === 403 ||
+      err.status === 502 ||
+      err.status === 503
+    )
+  }
+  return false
+}
+
 export async function listThreads(archived = false): Promise<ThreadPage> {
-  const response = await apiRequest<unknown>('/v1/threads' + query({ archived, limit: 100 }), {
-    csrf: false,
-  })
-  return asThreadPage(response)
+  try {
+    const response = await apiRequest<unknown>('/v1/threads' + query({ archived, limit: 100 }), {
+      csrf: false,
+    })
+    return asThreadPage(response)
+  } catch (err) {
+    if (isUnavailable(err)) return localThreadStore.list()
+    throw err
+  }
 }
 
 export async function createThread(title?: string | null): Promise<Thread> {
-  const response = await apiRequest<unknown>('/v1/threads', {
-    method: 'POST',
-    body: { title: title || null, locale: 'vi' },
-  })
-  return asThread(response)
+  try {
+    const response = await apiRequest<unknown>('/v1/threads', {
+      method: 'POST',
+      body: { title: title || null, locale: 'vi' },
+    })
+    return asThread(response)
+  } catch (err) {
+    if (isUnavailable(err)) return localThreadStore.create(title)
+    throw err
+  }
 }
 
 export async function getThread(threadId: string): Promise<ThreadEnvelope> {
-  const response = await apiRequest<unknown>('/v1/threads/' + encodeURIComponent(threadId), {
-    csrf: false,
-  })
-  return asThreadEnvelope(response)
+  // Check local store first (handles local-mode threads)
+  const local = localThreadStore.get(threadId)
+  if (local) return { thread: local, checkpoint: null }
+  try {
+    const response = await apiRequest<unknown>('/v1/threads/' + encodeURIComponent(threadId), {
+      csrf: false,
+    })
+    return asThreadEnvelope(response)
+  } catch (err) {
+    if (isUnavailable(err)) return { thread: { id: threadId, user_id: 'local', title: null, locale: 'vi', archived: false, summary: null, summary_version: 0, summarized_through_sequence: 0, created_at: new Date().toISOString(), updated_at: new Date().toISOString() }, checkpoint: null }
+    throw err
+  }
 }
 
 export async function renameThread(threadId: string, title: string): Promise<Thread> {
-  const response = await apiRequest<unknown>('/v1/threads/' + encodeURIComponent(threadId), {
-    method: 'PATCH',
-    body: { title },
-  })
-  return asThread(response)
+  // Update local store if this is a local thread
+  const localUpdated = localThreadStore.rename(threadId, title)
+  if (localUpdated) return localUpdated
+  try {
+    const response = await apiRequest<unknown>('/v1/threads/' + encodeURIComponent(threadId), {
+      method: 'PATCH',
+      body: { title },
+    })
+    return asThread(response)
+  } catch (err) {
+    if (isUnavailable(err)) {
+      const fallback = localThreadStore.get(threadId)
+      if (fallback) return fallback
+    }
+    throw err
+  }
 }
 
 export async function deleteThread(threadId: string): Promise<void> {
-  await apiRequest<void>('/v1/threads/' + encodeURIComponent(threadId), {
-    method: 'DELETE',
-  })
+  // Always remove from local store (handles local-mode threads)
+  localThreadStore.delete(threadId)
+  try {
+    await apiRequest<void>('/v1/threads/' + encodeURIComponent(threadId), {
+      method: 'DELETE',
+    })
+  } catch (err) {
+    if (isUnavailable(err)) return
+    throw err
+  }
 }
 
 export async function listMessages(threadId: string): Promise<MessagePage> {
-  const response = await apiRequest<unknown>(
-    '/v1/threads/' + encodeURIComponent(threadId) + '/messages?limit=200',
-    { csrf: false },
-  )
-  return asMessagePage(response)
+  // If this is a local thread, return local messages
+  if (localThreadStore.get(threadId)) return localThreadStore.listMessages(threadId)
+  try {
+    const response = await apiRequest<unknown>(
+      '/v1/threads/' + encodeURIComponent(threadId) + '/messages?limit=200',
+      { csrf: false },
+    )
+    return asMessagePage(response)
+  } catch (err) {
+    if (isUnavailable(err)) return { items: [], next_cursor: null }
+    throw err
+  }
 }
 
 export async function sendMessage(
@@ -129,8 +189,13 @@ export async function repriceOffer(offerId: string): Promise<RepriceResponse> {
 }
 
 export async function listTravelers(): Promise<Traveler[]> {
-  const response = await apiRequest<unknown>('/v1/travelers', { csrf: false })
-  return Array.isArray(response) ? response.map(asTraveler) : []
+  try {
+    const response = await apiRequest<unknown>('/v1/travelers', { csrf: false })
+    return Array.isArray(response) ? response.map(asTraveler) : []
+  } catch (err) {
+    if (isUnavailable(err)) return []
+    throw err
+  }
 }
 
 export async function createTraveler(body: TravelerCreate): Promise<Traveler> {
@@ -242,8 +307,13 @@ export async function reconcileBooking(bookingId: string): Promise<BookingWorkfl
 }
 
 export async function listBookings(): Promise<Booking[]> {
-  const response = await apiRequest<unknown>('/v1/bookings', { csrf: false })
-  return Array.isArray(response) ? response.map(asBooking) : []
+  try {
+    const response = await apiRequest<unknown>('/v1/bookings', { csrf: false })
+    return Array.isArray(response) ? response.map(asBooking) : []
+  } catch (err) {
+    if (isUnavailable(err)) return []
+    throw err
+  }
 }
 
 export async function getBooking(bookingId: string): Promise<Booking> {
@@ -254,8 +324,13 @@ export async function getBooking(bookingId: string): Promise<Booking> {
 }
 
 export async function listWatches(): Promise<WatchRecord[]> {
-  const response = await apiRequest<unknown>('/v1/watches', { csrf: false })
-  return Array.isArray(response) ? response.map(asWatch) : []
+  try {
+    const response = await apiRequest<unknown>('/v1/watches', { csrf: false })
+    return Array.isArray(response) ? response.map(asWatch) : []
+  } catch (err) {
+    if (isUnavailable(err)) return []
+    throw err
+  }
 }
 
 export async function createWatch(criteria: FlightWatchCriteriaInput): Promise<WatchRecord> {

@@ -116,7 +116,10 @@ def build_provider_registry(
         )
 
     if settings.weather_provider == "mock":
-        weather: WeatherProvider = MockWeatherProvider(clock=active_clock)
+        weather: WeatherProvider = MockWeatherProvider(
+            environment=settings.execution_mode,
+            clock=active_clock,
+        )
     elif settings.weather_provider == "openweather":
         assert client is not None
         assert settings.openweathermap_api_key is not None
@@ -134,7 +137,10 @@ def build_provider_registry(
 
     payment: PaymentProvider
     if settings.payment_provider == "mock":
-        payment = MockPaymentProvider(clock=active_clock)
+        payment = MockPaymentProvider(
+            environment=settings.execution_mode,
+            clock=active_clock,
+        )
     else:
         payment = UnavailablePaymentProvider(
             settings.payment_provider,
@@ -143,7 +149,10 @@ def build_provider_registry(
 
     notifications: NotificationProvider
     if settings.notification_provider == "mock":
-        notifications = MockNotificationProvider(clock=active_clock)
+        notifications = MockNotificationProvider(
+            environment=settings.execution_mode,
+            clock=active_clock,
+        )
     else:
         notifications = UnavailableNotificationProvider(
             settings.notification_provider,

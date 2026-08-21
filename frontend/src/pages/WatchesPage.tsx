@@ -7,7 +7,9 @@ import {
   Pause,
   Play,
   Plus,
+  Radio,
   Trash2,
+  TrendingDown,
 } from 'lucide-react'
 import { useState, type ReactNode } from 'react'
 import { useAuth } from '../auth/AuthProvider'
@@ -170,14 +172,66 @@ export function WatchesPage() {
   const transitionIsPending = (watchId: string): boolean =>
     transitionMutation.isPending && transitionMutation.variables?.id === watchId
 
+  const watches = query.data || []
+  const totalWatches = watches.length
+  const activeWatches = watches.filter((w) => w.status === 'active' || w.status === 'matched').length
+  const matchedWatches = watches.filter((w) => w.status === 'matched' || w.status === 'booked').length
+
   return (
-    <div className="page">
-      <div className="page-header">
-        <h1>Price watches</h1>
-        <Button onClick={() => setOpen(true)}>
-          <Plus size={17} /> New watch
+    <div className="page watches-page-wrapper">
+      {/* Header */}
+      <div className="page-header compact-page-header">
+        <div>
+          <div className="destinations-badge">
+            <Radio size={14} />
+            <span>Autonomous AI Price Tracking</span>
+          </div>
+          <h1>Flight Price Watches</h1>
+          <p className="section-subtitle">
+            Autonomous multi-agent scanners monitor Duffel GDS airline inventory every 15 mins for price drops.
+          </p>
+        </div>
+        <Button onClick={() => setOpen(true)} variant="primary">
+          <Plus size={16} /> Create New Watch
         </Button>
       </div>
+
+      {/* Summary KPI Cards */}
+      <div className="bookings-summary-grid">
+        <div className="summary-stat-card">
+          <div className="summary-stat-icon icon-emerald">
+            <Radio size={22} />
+          </div>
+          <div className="summary-stat-info">
+            <span className="summary-stat-label">Active Scanners</span>
+            <strong className="summary-stat-val text-success">{activeWatches}</strong>
+            <span className="summary-stat-hint">15-minute polling SLA</span>
+          </div>
+        </div>
+
+        <div className="summary-stat-card">
+          <div className="summary-stat-icon icon-green">
+            <TrendingDown size={22} />
+          </div>
+          <div className="summary-stat-info">
+            <span className="summary-stat-label">Deals Detected</span>
+            <strong className="summary-stat-val">{matchedWatches}</strong>
+            <span className="summary-stat-hint">Price drops matched</span>
+          </div>
+        </div>
+
+        <div className="summary-stat-card">
+          <div className="summary-stat-icon icon-blue">
+            <Bell size={22} />
+          </div>
+          <div className="summary-stat-info">
+            <span className="summary-stat-label">Total Routes</span>
+            <strong className="summary-stat-val">{totalWatches}</strong>
+            <span className="summary-stat-hint">Monitored corridors</span>
+          </div>
+        </div>
+      </div>
+
       {query.isError ? (
         <ErrorState error={query.error} onRetry={() => void query.refetch()} />
       ) : null}
@@ -190,12 +244,16 @@ export function WatchesPage() {
           retryLabel="Retry watch deletion"
         />
       ) : null}
-      {query.data?.length === 0 ? (
+      {watches.length === 0 && !query.isLoading && !query.isError ? (
         <EmptyState
-          icon={<Bell size={23} />}
-          title="No price watches yet"
-          description="Create a watch for a route and date window; you can pause or cancel it any time."
-          action={<Button onClick={() => setOpen(true)}>Create a watch</Button>}
+          icon={<Bell size={28} />}
+          title="No price watches active"
+          description="Create an autonomous price watch for your desired route and budget. Our AI agent will alert you the second fares drop."
+          action={
+            <Button onClick={() => setOpen(true)} variant="primary">
+              <Plus size={16} /> Create Your First Watch
+            </Button>
+          }
         />
       ) : null}
       {query.isLoading ? (

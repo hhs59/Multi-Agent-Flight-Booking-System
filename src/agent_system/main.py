@@ -3,6 +3,17 @@ import os
 import time
 import uuid
 from contextlib import asynccontextmanager
+from pathlib import Path
+
+# Load .env file automatically if present in the workspace root
+env_file = Path(__file__).resolve().parent.parent.parent / ".env"
+if env_file.exists():
+    with open(env_file, encoding="utf-8") as f:
+        for line in f:
+            line = line.strip()
+            if line and not line.startswith("#") and "=" in line:
+                key, value = line.split("=", 1)
+                os.environ[key.strip()] = value.strip().strip("'\"")
 
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
@@ -178,3 +189,15 @@ async def global_exception_handler(request: Request, exc: Exception):
         status_code=500,
         content={"error": "Internal server error", "trace_id": trace_id},
     )
+
+
+@app.get("/")
+async def root_index():
+    return {
+        "service": "Waypoint / Booked.ai Flight Concierge API",
+        "version": "0.1.0",
+        "status": "online",
+        "docs": "/docs",
+        "health": "/health",
+        "web_ui": "http://localhost:5173",
+    }
